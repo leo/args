@@ -11,6 +11,11 @@ class Commander {
 
     if (version) {
       this.option('version', 'Output the version number', version)
+
+      if (this.args.v || this.args.version) {
+        console.log(version)
+        process.exit()
+      }
     }
   }
 
