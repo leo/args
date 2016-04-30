@@ -13,7 +13,7 @@ class Commander {
     this.command('help', 'Display help')
   }
 
-  option (name, description, defaultValue) {
+  option (name, description, init, defaultValue) {
     let usage = []
 
     switch (name.constructor) {
@@ -33,12 +33,18 @@ class Commander {
       throw new Error('Short version of option is longer than 1 char')
     }
 
-    this.details.options.push({
+    let optionDetails = {
       defaultValue,
       usage,
       description
-    })
+    }
 
+    if (defaultValue) {
+      let initFunction = typeof init === 'function'
+      optionDetails.init = initFunction ? init : this.handleType(defaultValue)[1]
+    }
+
+    this.details.options.push(optionDetails)
     return this
   }
 
@@ -67,10 +73,10 @@ class Commander {
     }
   }
 
-  setProperties (names, initial) {
+  setProperties (option) {
     let value = false
 
-    for (let name of names) {
+    for (let name of option.usage) {
       let fromArgs = this.args[name]
 
       if (fromArgs) {
@@ -78,8 +84,14 @@ class Commander {
       }
     }
 
-    for (let name of names) {
-      this[name] = value
+    for (let name of option.usage) {
+      let propVal = value || option.defaultValue
+
+      if (option.init) {
+        propVal = option.init(propVal)
+      }
+
+      this[name] = propVal
     }
   }
 
@@ -166,7 +178,7 @@ class Commander {
     }
 
     for (let option of this.details.options) {
-      this.setProperties(option.usage, option.defaultValue)
+      this.setProperties(option)
     }
 
     const args = this.args
