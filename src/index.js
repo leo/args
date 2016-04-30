@@ -25,6 +25,7 @@ class Commander {
     }
 
     this.option('help', 'Output usage information')
+    this.command('help', 'Display help')
 
     if (this.args._[1] == 'help' || this.args.h || this.args.help) {
       this.renderHelp()
@@ -65,6 +66,13 @@ class Commander {
     return this
   }
 
+  command (usage, description) {
+    this.details.commands.push({
+      usage,
+      description
+    })
+  }
+
   setProperties (names, initial) {
     let value = false
 
@@ -81,6 +89,24 @@ class Commander {
     }
   }
 
+  generateDetails (items) {
+    let parts = []
+
+    const longest = items.sort((a, b) => {
+      return b.usage.length - a.usage.length
+    })[0].usage.length
+
+    for (let item of items) {
+      let usage = item.usage,
+          difference = longest - usage.length
+
+      usage += ' '.repeat(difference)
+      parts.push('  ' + usage + '  ' + item.description)
+    }
+
+    return parts
+  }
+
   renderHelp () {
     const binary = path.basename(this.args._[0])
 
@@ -89,23 +115,22 @@ class Commander {
       `Usage: ${binary} [options] [command]`,
       '',
       '',
-      'Options:',
+      'Commands:',
       ''
     ]
 
     const options = this.details.options
+    const commands = this.details.commands
 
-    const longest = options.sort((a, b) => {
-      return b.usage.length - a.usage.length
-    })[0].usage.length
+    details = details.concat(this.generateDetails(commands))
 
-    for (let option of options) {
-      let usage = option.usage,
-          difference = longest - usage.length
+    details = details.concat([
+      '',
+      'Options:',
+      ''
+    ])
 
-      usage += ' '.repeat(difference)
-      details.push(usage + '  ' + option.description)
-    }
+    details = details.concat(this.generateDetails(options))
 
     details.push('')
     console.log(details.join('\n  '))
