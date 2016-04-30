@@ -1,0 +1,26 @@
+{
+  "name": "commands",
+  "version": "0.1.0",
+  "description": "Parse command line arguments neatly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leo/commands.git"
+  },
+  "keywords": [
+    "command",
+    "line",
+    "arguments",
+    "commander",
+    "minimist"
+  ],
+  "author": "leo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leo/commands/issues"
+  },
+  "homepage": "https://github.com/leo/commands#readme"
+}
