@@ -85,13 +85,20 @@ class Commander {
     }
 
     for (let name of option.usage) {
-      let propVal = value || option.defaultValue
+      let propVal = value || option.defaultValue,
+          condition = true
 
       if (option.init) {
-        propVal = option.init(propVal)
+        if (option.init === toString) {
+          condition = propVal.constructor === Number
+        }
+
+        if (condition) {
+          propVal = option.init(propVal)
+        }
       }
 
-      this[name] = propVal
+      if (propVal) this[name] = propVal
     }
   }
 
