@@ -1,9 +1,10 @@
 import parser from 'minimist'
 import pkginfo from 'pkginfo'
+import path from 'path'
 
 class Commander {
   constructor() {
-    this.args = parser(process.argv.slice(2))
+    this.args = parser(process.argv.slice(1))
     const parent = module.parent
 
     pkginfo(parent)
@@ -25,7 +26,7 @@ class Commander {
 
     this.option('help', 'Output usage information')
 
-    if (this.args._[0] == 'help' || this.args.h || this.args.help) {
+    if (this.args._[1] == 'help' || this.args.h || this.args.help) {
       this.renderHelp()
     }
   }
@@ -72,9 +73,11 @@ class Commander {
   }
 
   renderHelp () {
+    const binary = path.basename(this.args._[0])
+
     let details = [
       '',
-      'Usage: muffin [options] [command]',
+      `Usage: ${binary} [options] [command]`,
       '',
       '',
       'Options:',
