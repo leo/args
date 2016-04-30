@@ -2,7 +2,10 @@
   "name": "commands",
   "version": "0.1.0",
   "description": "Parse command line arguments neatly",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "gulp",
     "prepublish": "gulp transpile"
