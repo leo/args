@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "description": "Parse command line arguments neatly",
   "main": "dist/index.js",
+  "private": true,
   "files": [
     "dist"
   ],
   "scripts": {
     "start": "gulp",
     "prepublish": "gulp transpile"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "repository": {
     "type": "git",
