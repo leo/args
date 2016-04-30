@@ -89,7 +89,8 @@ class Commander {
     }
   }
 
-  generateDetails (items) {
+  generateDetails (kind) {
+    const items = this.details[kind]
     let parts = []
 
     const longest = items.sort((a, b) => {
@@ -119,22 +120,21 @@ class Commander {
       ''
     ]
 
-    const options = this.details.options
-    const commands = this.details.commands
+    const commands = this.generateDetails('commands')
+    const options = this.generateDetails('options')
 
-    details = details.concat(this.generateDetails(commands))
-
-    details = details.concat([
-      '',
-      'Options:',
+    details = details.concat(
+      commands,
+      [
+        '',
+        'Options:',
+        ''
+      ],
+      options,
       ''
-    ])
+    )
 
-    details = details.concat(this.generateDetails(options))
-
-    details.push('')
     console.log(details.join('\n  '))
-
     process.exit()
   }
 }
