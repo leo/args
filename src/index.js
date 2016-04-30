@@ -1,8 +1,17 @@
 import parser from 'minimist'
+import pkginfo from 'pkginfo'
 
 class Commander {
   constructor() {
     this.args = parser(process.argv.slice(2))
+    const parent = module.parent
+
+    pkginfo(parent)
+    const version = parent.exports.version
+
+    if (version) {
+      this.option('version', 'Output the version number', version)
+    }
   }
 
   option (name, description, defaultValue) {
