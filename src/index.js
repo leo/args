@@ -46,10 +46,14 @@ class Commander {
 
         break
       case Array:
-        variants.concat(name)
+        variants = variants.concat(name)
         break
       default:
-        console.error(`Invalid name for option ${name}`)
+        throw new Error('Invalid name for option')
+    }
+
+    if (variants.length > 0 && variants[0].length > 1) {
+      throw new Error('Short version of option is longer than 1 char')
     }
 
     this.details.options.push({
