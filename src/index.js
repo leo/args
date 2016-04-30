@@ -29,6 +29,11 @@ class Commander {
     if (this.args._[1] == 'help' || this.args.h || this.args.help) {
       this.renderHelp()
     }
+
+    const args = this.args
+    args._.shift()
+
+    this.raw = args
   }
 
   option (name, description, defaultValue) {
