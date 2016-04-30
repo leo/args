@@ -34,7 +34,7 @@ class Commander {
     }
 
     this.details.options.push({
-      initial: defaultValue || false,
+      defaultValue,
       usage,
       description
     })
@@ -89,7 +89,7 @@ class Commander {
 
     for (let item in items) {
       let usage = items[item].usage,
-          initial = items[item].initial
+          initial = items[item].defaultValue
 
       if (usage.constructor === Array) {
         usage = `-${usage[0]}, --${usage[1]}`
@@ -126,8 +126,8 @@ class Commander {
       ''
     ]
 
-    const commands = this.generateDetails('commands')
-    const options = this.generateDetails('options')
+    const commands = this.generateDetails('commands'),
+          options = this.generateDetails('options')
 
     details = details.concat(
       commands,
@@ -166,7 +166,7 @@ class Commander {
     }
 
     for (let option of this.details.options) {
-      this.setProperties(option.usage, option.initial)
+      this.setProperties(option.usage, option.defaultValue)
     }
 
     const args = this.args
