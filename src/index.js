@@ -49,6 +49,24 @@ class Commander {
     })
   }
 
+  handleType (value) {
+    const type = value.constructor
+
+    switch (type) {
+      case String:
+        return ['[value]', toString]
+        break
+      case Array:
+        return ['<list>']
+        break
+      case Number:
+        return ['<n>', parseInt]
+        break
+      default:
+        return false
+    }
+  }
+
   setProperties (names, initial) {
     let value = false
 
@@ -70,10 +88,12 @@ class Commander {
     let parts = []
 
     for (let item in items) {
-      let usage = items[item].usage
+      let usage = items[item].usage,
+          initial = items[item].initial
 
       if (usage.constructor === Array) {
         usage = `-${usage[0]}, --${usage[1]}`
+        usage += initial ? ' ' + this.handleType(initial)[0] : ''
       }
 
       items[item].usage = usage
