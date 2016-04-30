@@ -72,7 +72,7 @@ class Commander {
   }
 
   renderHelp () {
-    let usage = [
+    let details = [
       '',
       'Usage: muffin [options] [command]',
       '',
@@ -81,12 +81,22 @@ class Commander {
       ''
     ]
 
-    for (let option of this.details.options) {
-      usage.push(`  ${option.usage}  ${option.description}`)
+    const options = this.details.options
+
+    const longest = options.sort((a, b) => {
+      return b.usage.length - a.usage.length
+    })[0].usage.length
+
+    for (let option of options) {
+      let usage = option.usage,
+          difference = longest - usage.length
+
+      usage += ' '.repeat(difference)
+      details.push(usage + '  ' + option.description)
     }
 
-    usage.push('')
-    console.log(usage.join('\n  '))
+    details.push('')
+    console.log(details.join('\n  '))
 
     process.exit()
   }
