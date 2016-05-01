@@ -53,6 +53,8 @@ class Commander {
       usage,
       description
     })
+
+    return this
   }
 
   handleType (value) {
