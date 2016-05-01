@@ -24,6 +24,10 @@ args
   .option('reload', 'Enable/disable livereloading')
   .command('serve', 'Serve your static site')
   .parse(process.argv)
+  
+if (args.port) {
+  console.log(`I'll be running on port ${args.port}`)
+}
 ```
 
 The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So when outputting the help, you'll get this:
