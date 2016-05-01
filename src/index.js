@@ -1,6 +1,7 @@
 import parser from 'minimist'
 import pkginfo from 'pkginfo'
 import path from 'path'
+import { exec } from 'child_process'
 
 class Commander {
   constructor() {
@@ -165,8 +166,41 @@ class Commander {
     process.exit()
   }
 
+  runCommand (name) {
+    const full = path.basename(this.args._[0]) + '-' + name
+
+    let args = process.argv,
+        i = 0
+
+    while (i < 3) {
+      args.shift()
+      i++
+    }
+
+    console.log(args)
+
+    let child = exec(full, args, {
+      stdio: 'inherit',
+      detached: true
+    })
+
+    child.on('error', err => {
+      throw err
+    })
+  }
+
   parse (argv) {
     this.args = parser(argv.slice(1))
+    const subCommand = this.args._[1] || false
+
+    for (let command of this.details.commands) {
+      if (command.usage !== subCommand) {
+        continue
+      }
+
+      this.runCommand(subCommand)
+      break
+    }
 
     const parent = module.parent
 
