@@ -9,7 +9,7 @@ But beware: We're not trying to reinvent the wheel here. Because of that, we've 
 Firstly, you need to install the package:
 
 ```bash
-npm install args --save
+npm install --save args
 ```
 
 Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
