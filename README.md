@@ -15,6 +15,8 @@ npm install --save args
 Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
 
 ```js
+#!/usr/bin/env node
+
 import args from 'args'
 
 args
