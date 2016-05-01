@@ -23,7 +23,8 @@ args
   .option('port', 'The port on which the app will be running', 3000)
   .option('reload', 'Enable/disable livereloading')
   .command('serve', 'Serve your static site')
-  .parse(process.argv)
+
+args.parse(process.argv)
   
 if (args.port) {
   console.log(`I'll be running on port ${args.port}`)
