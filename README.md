@@ -6,7 +6,13 @@ But beware: We're not trying to reinvent the wheel here. Because of that, we've 
 
 ## Usage
 
-Firstly, you need to install the package: `npm install args --save`. Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
+Firstly, you need to install the package:
+
+```bash
+npm install args --save
+```
+
+Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
 
 ```js
 import args from 'args'
@@ -64,3 +70,10 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 This method takes the process' command line arguments (command and options) and uses the internal methods to get their values and assign them to the current instance of args. It needs to be run after all of the `.option` and `.command` calls. If you run it before them, the method calls after it won't take effect.
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
+
+## Contribute
+
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
+2. Link the package to the global module directory: `npm link`
+3. Transpile the source code and watch for changes: `gulp`
+4. Within the module you want to test your local development instance of args, just link it to the dependencies: `npm link args`. Instead of the default one from npm, node will now use your clone of args!
