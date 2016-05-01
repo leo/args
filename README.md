@@ -25,31 +25,14 @@ args
   .command('serve', 'Serve your static site')
 
 args.parse(process.argv)
-  
+```
+
+The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So as an example: If you want to check for the value of the "port" option, just do this:
+
+```js
 if (args.port) {
   console.log(`I'll be running on port ${args.port}`)
 }
-```
-
-The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So when outputting the help, you'll get this:
-
-```
-
-  Usage: haha [options] [command]
-  
-  
-  Commands:
-  
-    serve  Serve your static site
-    help   Display help
-  
-  Options:
-  
-    -v, --version  Output the version number
-    -r, --reload   Enable/disable livereloading
-    -h, --help     Output usage information
-    -p, --port     The port on which the app will be running
-  
 ```
 
 ## API
@@ -84,3 +67,23 @@ This method takes the process' command line arguments (command and options) and 
 2. Link the package to the global module directory: `npm link`
 3. Transpile the source code and watch for changes: `gulp`
 4. Within the module you want to test your local development instance of args, just link it to the dependencies: `npm link args`. Instead of the default one from npm, node will now use your clone of args!
+
+
+```
+
+  Usage: haha [options] [command]
+  
+  
+  Commands:
+  
+    serve  Serve your static site
+    help   Display help
+  
+  Options:
+  
+    -v, --version  Output the version number
+    -r, --reload   Enable/disable livereloading
+    -h, --help     Output usage information
+    -p, --port     The port on which the app will be running
+  
+```
