@@ -1,7 +1,7 @@
 {
   "name": "args",
   "version": "0.1.0",
-  "description": "Parse command line arguments neatly",
+  "description": "Minimal toolkit for building CLIs",
   "main": "dist/index.js",
   "private": true,
   "files": [
