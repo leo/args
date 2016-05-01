@@ -12,7 +12,7 @@ Firstly, you need to install the package:
 npm install --save args
 ```
 
-Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
+Once you're done, you can start using it within your binaries:
 
 ```js
 #!/usr/bin/env node
@@ -27,7 +27,7 @@ args
 args.parse(process.argv)
 ```
 
-The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So as an example: If you want to check for the value of the "port" option, just do this:
+The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So if you want to check for the value of the "port" option, just do this:
 
 ```js
 if (args.port) {
