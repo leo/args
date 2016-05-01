@@ -6,6 +6,39 @@ But beware: We're not trying to reinvent the wheel here. Because of that, we've 
 
 ## Usage
 
+Firstly, you need to install the package: `npm install args --save`. Once you're done, you can start using it within your binaries. Here's an ES6 example (don't worry, the package will also work with non-ES6 scripts):
+
+```js
+import args from 'args'
+
+args
+  .option('port', 'The port on which the app will be running', 3000)
+  .option('reload', 'Enable/disable livereloading')
+  .command('serve', 'Serve your static site')
+  .parse(process.argv)
+```
+
+The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So when outputting the help, you'll get this:
+
+```
+
+  Usage: haha [options] [command]
+  
+  
+  Commands:
+  
+    serve  Serve your static site
+    help   Display help
+  
+  Options:
+  
+    -v, --version  Output the version number
+    -r, --reload   Stupid stuff
+    -h, --help     Output usage information
+    -p, --port     The port on which the app will be running
+  
+```
+
 ### API
 
 #### .option(name, description, init, default)
@@ -19,7 +52,7 @@ Shall be used to register a new option for the binary in which it's being called
 
 #### .command(name, description)
 
-Register a new command. Args requires all binaries to be defined in the style of git's. That means each sub command should be a separate binary called "&#60;parent-command&#62;-&#60;sub-command&#62;".
+Register a new sub command. Args requires all binaries to be defined in the style of git's. That means each sub command should be a separate binary called "&#60;parent-command&#62;-&#60;sub-command&#62;".
 
 For example: If your main binary is called "muffin", the binary of the subcommand "muffin list" should be called "muffin-list". And all of them should be defined as such in your [package.json](https://docs.npmjs.com/files/package.json#bin).
 
