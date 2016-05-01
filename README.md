@@ -39,7 +39,7 @@ The upper code defines two options called "port" and "reload" for the current bi
   Options:
   
     -v, --version  Output the version number
-    -r, --reload   Stupid stuff
+    -r, --reload   Enable/disable livereloading
     -h, --help     Output usage information
     -p, --port     The port on which the app will be running
   
