@@ -35,6 +35,27 @@ if (args.port) {
 }
 ```
 
+In turn, this is how the auto-generated usage information will look like:
+
+```
+
+  Usage: haha [options] [command]
+  
+  
+  Commands:
+  
+    serve  Serve your static site
+    help   Display help
+  
+  Options:
+  
+    -v, --version  Output the version number
+    -r, --reload   Enable/disable livereloading
+    -h, --help     Output usage information
+    -p, --port     The port on which the app will be running
+    
+```
+
 ## API
 
 ### .option(name, description, init, default)
@@ -67,23 +88,3 @@ This method takes the process' command line arguments (command and options) and 
 2. Link the package to the global module directory: `npm link`
 3. Transpile the source code and watch for changes: `gulp`
 4. Within the module you want to test your local development instance of args, just link it to the dependencies: `npm link args`. Instead of the default one from npm, node will now use your clone of args!
-
-
-```
-
-  Usage: haha [options] [command]
-  
-  
-  Commands:
-  
-    serve  Serve your static site
-    help   Display help
-  
-  Options:
-  
-    -v, --version  Output the version number
-    -r, --reload   Enable/disable livereloading
-    -h, --help     Output usage information
-    -p, --port     The port on which the app will be running
-  
-```
