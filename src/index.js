@@ -3,7 +3,7 @@ import pkginfo from 'pkginfo'
 import path from 'path'
 import { spawn } from 'child_process'
 
-class Commander {
+class Args {
   constructor() {
     this.details = {
       options: [],
@@ -223,4 +223,4 @@ class Commander {
   }
 }
 
-export default new Commander
+export default new Args
