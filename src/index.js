@@ -137,7 +137,7 @@ class Commander {
   }
 
   renderHelp () {
-    const binary = path.basename(this.args._[0])
+    const binary = path.basename(this.args._[0]).replace('-', ' ')
 
     let details = [
       '',
@@ -163,12 +163,6 @@ class Commander {
     )
 
     console.log(details.join('\n  '))
-
-    /*
-    if (this.child) {
-      this.child.kill('SIGINT')
-    }*/
-
     process.exit()
   }
 
