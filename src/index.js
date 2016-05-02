@@ -202,8 +202,7 @@ class Commander {
         continue
       }
 
-      this.runCommand(subCommand)
-      return
+      return this.runCommand(subCommand)
     }
 
     const parent = module.parent
