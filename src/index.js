@@ -136,36 +136,6 @@ class Commander {
     return parts
   }
 
-  renderHelp () {
-    const binary = path.basename(this.args._[0]).replace('-', ' ')
-
-    let details = [
-      '',
-      `Usage: ${binary} [options] [command]`,
-      '',
-      '',
-      'Commands:',
-      ''
-    ]
-
-    const commands = this.generateDetails('commands'),
-          options = this.generateDetails('options')
-
-    details = details.concat(
-      commands,
-      [
-        '',
-        'Options:',
-        ''
-      ],
-      options,
-      ''
-    )
-
-    console.log(details.join('\n  '))
-    process.exit()
-  }
-
   runCommand (name) {
     const full = path.basename(this.args._[0]) + '-' + name
 
@@ -220,11 +190,36 @@ class Commander {
     for (let option of this.details.options) {
       this.setProperties(option)
     }
+  }
 
-    const args = this.args
-    args._.shift()
+  renderHelp () {
+    const binary = path.basename(this.args._[0]).replace('-', ' ')
 
-    this.raw = args
+    let details = [
+      '',
+      `Usage: ${binary} [options] [command]`,
+      '',
+      '',
+      'Commands:',
+      ''
+    ]
+
+    const commands = this.generateDetails('commands'),
+          options = this.generateDetails('options')
+
+    details = details.concat(
+      commands,
+      [
+        '',
+        'Options:',
+        ''
+      ],
+      options,
+      ''
+    )
+
+    console.log(details.join('\n  '))
+    process.exit()
   }
 }
 
