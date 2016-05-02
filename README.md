@@ -2,9 +2,15 @@
 
 This package makes creating command line interfaces a breeze.
 
-While there might be many alternatives out there, all ones I used are still based on old best practises (when it comes to sub commands or auto-generated usage information, for example).
+While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://www.npmjs.com/package/minimist) for all of the actual parsing.
 
-But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://www.npmjs.com/package/minimist) for all of the actual parsing. Thanks to this decision, args' core only contains a [few hundred lines](src/index.js) of code.
+**So what makes args special?**
+
+- Git-style sub commands (e.g. "pizza-cheese")
+- Auto-generated usage information
+- Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
+- Clean syntax for defining options and commands
+- The core only contains a [few hundred lines](src/index.js) of code
 
 ## Usage
 
@@ -32,6 +38,8 @@ args.parse(process.argv)
 The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So if you want to check for the value of the "port" option, just do this:
 
 ```js
+// This also works with "args.p", because the short name of the "port" option is "p"
+
 if (args.port) {
   console.log(`I'll be running on port ${args.port}`)
 }
