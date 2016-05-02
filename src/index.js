@@ -1,7 +1,7 @@
 import parser from 'minimist'
 import pkginfo from 'pkginfo'
 import path from 'path'
-import { exec } from 'child_process'
+import { spawn } from 'child_process'
 
 class Commander {
   constructor() {
@@ -177,9 +177,7 @@ class Commander {
       i++
     }
 
-    console.log(args)
-
-    let child = exec(full, args, {
+    let child = spawn(full, args, {
       stdio: 'inherit',
       detached: true
     })
