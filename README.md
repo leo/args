@@ -12,7 +12,7 @@ While there might be many alternatives out there, all ones I used are still base
 - Clean syntax for defining options and commands
 - The core only contains a [few hundred lines](src/index.js) of code (even after transpiling)
 - Besides of [minimist](https://npmjs.com/minimist) and [pkginfo](https://npmjs.com/pkginfo), no additional dependencies are used
-- No need to check for `argv.option` and `argv.o`, just use `args.option`
+- Easily retrieve value of option: `args.option`
 
 ## Usage
 
