@@ -2,7 +2,7 @@
 
 This package makes creating command line interfaces a breeze.
 
-While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://www.npmjs.com/package/minimist) for all of the actual parsing.
+While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://npmjs.com/minimist) for all of the actual parsing.
 
 **So what makes args special?**
 
@@ -10,7 +10,9 @@ While there might be many alternatives out there, all ones I used are still base
 - Auto-generated usage information
 - Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
 - Clean syntax for defining options and commands
-- The core only contains a [few hundred lines](src/index.js) of code
+- The core only contains a [few hundred lines](src/index.js) of code (even after transpiling)
+- Besides of [minimist](https://npmjs.com/minimist) and [pkginfo](https://npmjs.com/pkginfo), no additional dependencies are used
+- No need to check for `argv.option` and `argv.o`, just use `args.option`
 
 ## Usage
 
