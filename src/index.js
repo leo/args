@@ -163,6 +163,12 @@ class Commander {
     )
 
     console.log(details.join('\n  '))
+
+    /*
+    if (this.child) {
+      this.child.kill('SIGINT')
+    }*/
+
     process.exit()
   }
 
@@ -177,12 +183,12 @@ class Commander {
       i++
     }
 
-    let child = spawn(full, args, {
+    this.child = spawn(full, args, {
       stdio: 'inherit',
       detached: true
     })
 
-    child.on('error', err => {
+    this.child.on('error', err => {
       throw err
     })
   }
@@ -197,7 +203,7 @@ class Commander {
       }
 
       this.runCommand(subCommand)
-      break
+      return
     }
 
     const parent = module.parent
