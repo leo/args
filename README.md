@@ -103,4 +103,4 @@ This method takes the process' command line arguments (command and options) and 
 
 ## 👑
 
-Special thanks to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content of the package, you can find it [here](https://github.com/dimsmol/args).
+Special thanks to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content (before I've added my stuff) of the package, you can find it [here](https://github.com/dimsmol/args).
