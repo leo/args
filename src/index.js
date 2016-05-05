@@ -138,7 +138,8 @@ class Args {
 
   runCommand (name) {
     if (name === 'help') {
-      return this.renderHelp()
+      this.renderHelp()
+      return
     }
 
     const full = path.basename(this.args._[0]) + '-' + name
@@ -163,16 +164,6 @@ class Args {
 
   parse (argv) {
     this.args = parser(argv.slice(1))
-    const subCommand = this.args._[1] || false
-
-    for (let command of this.details.commands) {
-      if (command.usage !== subCommand) {
-        continue
-      }
-
-      return this.runCommand(subCommand)
-    }
-
     const parent = module.parent
 
     pkginfo(parent)
@@ -187,8 +178,19 @@ class Args {
       }
     }
 
+    const subCommand = this.args._[1] || false
+
+    for (let command of this.details.commands) {
+      if (command.usage !== subCommand) {
+        continue
+      }
+
+      return this.runCommand(subCommand)
+    }
+
     if (this.args.h || this.args.help) {
-      return this.renderHelp()
+      this.renderHelp()
+      return
     }
 
     for (let option of this.details.options) {
