@@ -137,6 +137,10 @@ class Args {
   }
 
   runCommand (name) {
+    if (name === 'help') {
+      return this.renderHelp()
+    }
+
     const full = path.basename(this.args._[0]) + '-' + name
 
     let args = process.argv,
@@ -183,8 +187,8 @@ class Args {
       }
     }
 
-    if (this.args._[1] == 'help' || this.args.h || this.args.help) {
-      this.renderHelp()
+    if (this.args.h || this.args.help) {
+      return this.renderHelp()
     }
 
     for (let option of this.details.options) {
