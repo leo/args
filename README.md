@@ -94,6 +94,21 @@ This method takes the process' command line arguments (command and options) and 
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
 
+### .raw
+
+This property exposes all arguments that have been parsed by [minimist](https://npmjs.com/minimist). This is useful when trying to get the value after the command, for example:
+
+```bash
+serve ./directory
+```
+
+The upper path can now be loaded by doing:
+
+```js
+// Contains "./directory"
+const path = args.args._[1]
+```
+
 ## Contribute
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
