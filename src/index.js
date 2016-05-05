@@ -80,7 +80,7 @@ class Args {
     let value = false
 
     for (let name of option.usage) {
-      let fromArgs = this.args[name]
+      let fromArgs = this.raw[name]
 
       if (fromArgs) {
         value = fromArgs
@@ -142,7 +142,7 @@ class Args {
       return
     }
 
-    const full = path.basename(this.args._[0]) + '-' + name
+    const full = path.basename(this.raw._[0]) + '-' + name
 
     let args = process.argv,
         i = 0
@@ -163,7 +163,7 @@ class Args {
   }
 
   parse (argv) {
-    this.args = parser(argv.slice(1))
+    this.raw = parser(argv.slice(1))
     const parent = module.parent
 
     pkginfo(parent)
@@ -172,13 +172,13 @@ class Args {
     if (version) {
       this.option('version', 'Output the version number', version)
 
-      if (this.args.v || this.args.version) {
+      if (this.raw.v || this.raw.version) {
         console.log(version)
         process.exit()
       }
     }
 
-    const subCommand = this.args._[1] || false
+    const subCommand = this.raw._[1] || false
 
     for (let command of this.details.commands) {
       if (command.usage !== subCommand) {
@@ -188,7 +188,7 @@ class Args {
       return this.runCommand(subCommand)
     }
 
-    if (this.args.h || this.args.help) {
+    if (this.raw.h || this.raw.help) {
       this.renderHelp()
       return
     }
@@ -199,7 +199,7 @@ class Args {
   }
 
   renderHelp () {
-    const binary = path.basename(this.args._[0]).replace('-', ' ')
+    const binary = path.basename(this.raw._[0]).replace('-', ' ')
 
     let details = [
       '',
