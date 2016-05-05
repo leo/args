@@ -72,7 +72,7 @@ In turn, this is how the auto-generated usage information will look like:
 
 ### .option(name, description, init, default)
 
-Shall be used to register a new option for the binary in which it's being called.
+Register a new option for the binary in which it's being called.
 
 - **name:** Takes a string which defines the name of the option. In this case, the first letter will be used as the short version (`port` => `-p, --port`). However, it can also be an array in which the first value defines the short version (`p` => `-p`) and the second one the long version (`packages` => `--packages`).
 - **description:** A short explanation of what the option shall be used for. Will be outputted along with help.
