@@ -1,5 +1,6 @@
 import parser from 'minimist'
 import pkginfo from 'pkginfo'
+import camelcase from 'camelcase'
 import path from 'path'
 import { spawn } from 'child_process'
 
@@ -101,6 +102,7 @@ class Args {
         }
       }
 
+      name = camelcase(name)
       if (propVal) this[name] = propVal
     }
   }

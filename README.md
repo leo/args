@@ -11,7 +11,6 @@ While there might be many alternatives out there, all ones I used are still base
 - Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
 - Clean [syntax](#usage) for defining options and commands
 - The core only contains a [few hundred lines](src/index.js) of code (even after transpiling)
-- Besides of [minimist](https://npmjs.com/minimist) and [pkginfo](https://npmjs.com/pkginfo), no additional dependencies are used
 - Easily retrieve values of options: `args.option`
 
 ## Usage

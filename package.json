@@ -43,6 +43,7 @@
     "gulp-cached": "^1.1.0"
   },
   "dependencies": {
+    "camelcase": "^3.0.0",
     "minimist": "^1.2.0",
     "pkginfo": "^0.4.0"
   }
