@@ -115,7 +115,7 @@ const path = args.args._[1]
 3. Transpile the source code and watch for changes: `gulp`
 4. Within the module you want to test your local development instance of args, just link it to the dependencies: `npm link args`. Instead of the default one from npm, node will now use your clone of args!
 
--
+--
 👑
 
 Special thanks to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content (before I've added my stuff) of the package, you can find it [here](https://github.com/dimsmol/args).
