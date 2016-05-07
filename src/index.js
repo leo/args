@@ -247,7 +247,7 @@ class Args {
 
     if (this.isDefined(subCommand, 'commands')) {
       this.runCommand(subCommand)
-      return
+      return {}
     } else if (this.config.errors && subCommand) {
       console.error('Command not found')
     }
