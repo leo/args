@@ -13,7 +13,8 @@ class Args {
 
     this.config = {
       help: true,
-      version: true
+      version: true,
+      errors: true
     }
 
     this.option('help', 'Output usage information')
@@ -116,18 +117,27 @@ class Args {
   }
 
   getOptions () {
-    let args = {}
+    let args = this.raw,
+        options = {}
 
-    for (let option of this.details.options) {
-      let arg = this.readOption(option)
-      Object.assign(args, arg)
+    delete args._
+
+    for (let option in args) {
+      let related = this.isDefined(option, 'options')
+
+      if (related) {
+        let details = this.readOption(related)
+        Object.assign(options, details)
+      } else if (this.config.errors) {
+        console.error('Option not known')
+      }
     }
 
-    for (let arg in args) {
-      this[arg] = args[arg]
+    for (let option in options) {
+      this[option] = options[option]
     }
 
-    return args
+    return options
   }
 
   generateDetails (kind) {
@@ -167,7 +177,7 @@ class Args {
       return
     }
 
-    const full = path.basename(this.raw._[0]) + '-' + name
+    const full = this.binary + '-' + name
 
     let args = process.argv,
         i = 0
@@ -203,9 +213,30 @@ class Args {
     }
   }
 
+  isDefined (name, list) {
+    const children = this.details[list]
+
+    for (let child of children) {
+      let usage = child.usage,
+          type = usage.constructor
+
+      if (type === Array && usage.includes(name)) {
+        return child
+      }
+
+      if (type === String && usage === name) {
+        return child
+      }
+    }
+
+    return false
+  }
+
   parse (argv, options) {
     Object.assign(this.config, options)
+
     this.raw = parser(argv.slice(1))
+    this.binary = path.basename(this.raw._[0])
 
     if (this.config.version) {
       this.checkVersion()
@@ -214,12 +245,11 @@ class Args {
     const subCommand = this.raw._[1] || false,
           helpTriggered = this.raw.h || this.raw.help
 
-    for (let command of this.details.commands) {
-      if (command.usage !== subCommand) {
-        continue
-      }
-
-      return this.runCommand(subCommand)
+    if (this.isDefined(subCommand, 'commands')) {
+      this.runCommand(subCommand)
+      return
+    } else if (this.config.errors && subCommand) {
+      console.error('Command not found')
     }
 
     if (this.config.help && helpTriggered) {
