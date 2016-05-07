@@ -91,7 +91,7 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 
 This method takes the process' command line arguments (command and options) and uses the internal methods to get their values and assign them to the current instance of args. It needs to be run after all of the `.option` and `.command` calls. If you run it before them, the method calls after it won't take effect.
 
-The function also returns all options that have been used and their respective values.
+The methods also returns all options that have been used and their respective values.
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
 
