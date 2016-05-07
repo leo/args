@@ -117,14 +117,14 @@ Outputs the usage information based on the options and comments you've registere
 
 ## Configuration
 
-By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties.
-
-You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
+By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties:
 
 | Property | Description | Default value |
 | -------- | ----------- | ------------- |
 | help     | Automatically render the usage information when running `help`, `-h` or `--help` | true |
 | version  | Outputs the version tag of your package.json | true |
+
+You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
 
 ## Contribute
 
