@@ -163,7 +163,7 @@ class Args {
 
   runCommand (name) {
     if (this.config.help && name === 'help') {
-      this.renderHelp()
+      this.showHelp()
       return
     }
 
@@ -211,7 +211,8 @@ class Args {
       this.checkVersion()
     }
 
-    const subCommand = this.raw._[1] || false
+    const subCommand = this.raw._[1] || false,
+          helpTriggered = this.raw.h || this.raw.help
 
     for (let command of this.details.commands) {
       if (command.usage !== subCommand) {
@@ -221,16 +222,14 @@ class Args {
       return this.runCommand(subCommand)
     }
 
-    const helpTriggered = this.raw.h || this.raw.help
-
     if (this.config.help && helpTriggered) {
-      this.renderHelp()
+      this.showHelp()
     }
 
     return this.getOptions()
   }
 
-  renderHelp () {
+  showHelp () {
     const binary = path.basename(this.raw._[0]).replace('-', ' ')
 
     let details = [
