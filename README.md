@@ -105,7 +105,7 @@ The upper path can now be loaded by doing:
 
 ```js
 // Contains "./directory"
-const path = args.args._[1]
+const path = args.raw._[1]
 ```
 
 ## Contribute
