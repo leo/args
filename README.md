@@ -94,7 +94,7 @@ This method takes the process' command line arguments (command and options) and 
 The methods also returns all options that have been used and their respective values.
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
-- **options:** This parameter accepts an object containing several configuration options.
+- **options:** This parameter accepts an object containing several [configuration options](#configuration).
 
 ### .raw
 
@@ -115,7 +115,7 @@ const path = args.raw._[1]
 
 By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties.
 
-You can pass the configuration object as the second paramater of `.parse()`.
+You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
 
 | Property | Description | Default value |
 | -------- | ----------- | ------------- |
