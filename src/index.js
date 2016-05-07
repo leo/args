@@ -77,7 +77,7 @@ class Args {
     }
   }
 
-  setProperties (option) {
+  setProperty (option) {
     let value = false
 
     for (let name of option.usage) {
@@ -196,7 +196,7 @@ class Args {
     }
 
     for (let option of this.details.options) {
-      this.setProperties(option)
+      this.setProperty(option)
     }
   }
 
