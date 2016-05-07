@@ -111,6 +111,10 @@ The upper path can now be loaded by doing:
 const path = args.raw._[1]
 ```
 
+### .showHelp()
+
+Outputs the usage information based on the options and comments you've registered so far.
+
 ## Configuration
 
 By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties.
