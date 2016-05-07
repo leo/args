@@ -77,8 +77,9 @@ class Args {
     }
   }
 
-  setProperty (option) {
-    let value = false
+  readOption (option) {
+    let value = false,
+        contents = {}
 
     for (let name of option.usage) {
       let fromArgs = this.raw[name]
@@ -103,8 +104,25 @@ class Args {
       }
 
       name = camelcase(name)
-      if (propVal) this[name] = propVal
+      if (propVal) contents[name] = propVal
     }
+
+    return contents
+  }
+
+  getOptions () {
+    let args = {}
+
+    for (let option of this.details.options) {
+      let arg = this.readOption(option)
+      Object.assign(args, arg)
+    }
+
+    for (let arg in args) {
+      this[arg] = args[arg]
+    }
+
+    return args
   }
 
   generateDetails (kind) {
@@ -195,9 +213,7 @@ class Args {
       return
     }
 
-    for (let option of this.details.options) {
-      this.setProperty(option)
-    }
+    return this.getOptions()
   }
 
   renderHelp () {
