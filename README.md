@@ -87,13 +87,19 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 - **name:** Takes a string which defines the name of the command. This value will be used when outputting the help.
 - **description:** A short explanation of what the command shall be used for. Will be outputted along with help.
 
-### .parse(argv)
+### .parse(argv, options)
 
 This method takes the process' command line arguments (command and options) and uses the internal methods to get their values and assign them to the current instance of args. It needs to be run after all of the `.option` and `.command` calls. If you run it before them, the method calls after it won't take effect.
 
 The methods also returns all options that have been used and their respective values.
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
+- **options:** This parameter accepts an object containing several configuration options. Currently, these are available:
+
+| Property | Description | Default value |
+| -------- | ----------- | ------------- |
+| help     | Automatically render the usage information when running `help`, `-h` or `--help` | true |
+| version  | Outputs the version tag of your package.json | true |
 
 ### .raw
 

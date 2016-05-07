@@ -11,6 +11,11 @@ class Args {
       commands: []
     }
 
+    this.config = {
+      help: true,
+      version: true
+    }
+
     this.option('help', 'Output usage information')
     this.command('help', 'Display help')
   }
@@ -157,7 +162,7 @@ class Args {
   }
 
   runCommand (name) {
-    if (name === 'help') {
+    if (this.config.help && name === 'help') {
       this.renderHelp()
       return
     }
@@ -182,8 +187,7 @@ class Args {
     })
   }
 
-  parse (argv) {
-    this.raw = parser(argv.slice(1))
+  checkVersion () {
     const parent = module.parent
 
     pkginfo(parent)
@@ -197,6 +201,15 @@ class Args {
         process.exit()
       }
     }
+  }
+
+  parse (argv, options) {
+    Object.assign(this.config, options)
+    this.raw = parser(argv.slice(1))
+
+    if (this.config.version) {
+      this.checkVersion()
+    }
 
     const subCommand = this.raw._[1] || false
 
@@ -208,9 +221,10 @@ class Args {
       return this.runCommand(subCommand)
     }
 
-    if (this.raw.h || this.raw.help) {
+    const helpTriggered = this.raw.h || this.raw.help
+
+    if (this.config.help && helpTriggered) {
       this.renderHelp()
-      return
     }
 
     return this.getOptions()
