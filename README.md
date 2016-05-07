@@ -94,12 +94,7 @@ This method takes the process' command line arguments (command and options) and 
 The methods also returns all options that have been used and their respective values.
 
 - **argv:** Should be the process' argv: `process.argv`, for example.
-- **options:** This parameter accepts an object containing several configuration options. Currently, these are available:
-
-| Property | Description | Default value |
-| -------- | ----------- | ------------- |
-| help     | Automatically render the usage information when running `help`, `-h` or `--help` | true |
-| version  | Outputs the version tag of your package.json | true |
+- **options:** This parameter accepts an object containing several configuration options.
 
 ### .raw
 
@@ -115,6 +110,17 @@ The upper path can now be loaded by doing:
 // Contains "./directory"
 const path = args.raw._[1]
 ```
+
+## Configuration
+
+By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties.
+
+You can pass the configuration object as the second paramater of `.parse()`.
+
+| Property | Description | Default value |
+| -------- | ----------- | ------------- |
+| help     | Automatically render the usage information when running `help`, `-h` or `--help` | true |
+| version  | Outputs the version tag of your package.json | true |
 
 ## Contribute
 
