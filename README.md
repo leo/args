@@ -1,4 +1,4 @@
-# args [![Gitter](https://badges.gitter.im/leo/args.svg)](https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+# args [![Gitter](https://badges.gitter.im/leo/args.svg)](https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/leo/args.svg?branch=master)](https://travis-ci.org/leo/args)
 
 This package makes creating command line interfaces a breeze.
 
