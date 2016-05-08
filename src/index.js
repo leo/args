@@ -117,9 +117,10 @@ class Args {
   }
 
   getOptions () {
-    let args = this.raw,
+    let args = {},
         options = {}
 
+    Object.assign(args, this.raw)
     delete args._
 
     for (let option in args) {
@@ -254,7 +255,7 @@ class Args {
       this.showHelp()
     }
 
-    return Object.assign(this.getOptions(), this.raw)
+    return this.getOptions()
   }
 
   showHelp () {
