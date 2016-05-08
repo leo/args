@@ -117,17 +117,19 @@ class Args {
   }
 
   getOptions () {
-    let args = {},
-        options = {}
+    let options = {},
+        args = {}
 
     Object.assign(args, this.raw)
     delete args._
 
+    // Set option defaults
     for (let option of this.details.options) {
       if (!option.defaultValue) continue
       Object.assign(options, this.readOption(option))
     }
 
+    // Override defaults if used in command line
     for (let option in args) {
       let related = this.isDefined(option, 'options')
 
@@ -135,10 +137,13 @@ class Args {
         let details = this.readOption(related)
         Object.assign(options, details)
       } else if (this.config.errors) {
+        // Throw an error if option not defined
         console.error(`Option "${option}" not known`)
       }
     }
 
+    // Assign options to current instance
+    // Will be dropped in 1.0.0
     for (let option in options) {
       this[option] = options[option]
     }
