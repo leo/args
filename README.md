@@ -1,6 +1,6 @@
 # args [![Gitter](https://badges.gitter.im/leo/args.svg)](https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-> This package makes creating command line interfaces a breeze.
+This package makes creating command line interfaces a breeze.
 
 While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://npmjs.com/minimist) for all of the actual parsing.
 
