@@ -129,7 +129,7 @@ class Args {
         let details = this.readOption(related)
         Object.assign(options, details)
       } else if (this.config.errors) {
-        console.error('Option not known')
+        console.error(`Option "${option}" not known`)
       }
     }
 
@@ -248,15 +248,13 @@ class Args {
     if (this.isDefined(subCommand, 'commands')) {
       this.runCommand(subCommand)
       return {}
-    } else if (this.config.errors && subCommand) {
-      console.error('Command not found')
     }
 
     if (this.config.help && helpTriggered) {
       this.showHelp()
     }
 
-    return this.getOptions()
+    return Object.assign(this.getOptions(), this.raw)
   }
 
   showHelp () {
