@@ -271,7 +271,7 @@ class Args {
       let usage = child.usage,
           type = usage.constructor
 
-      if (type === Array && usage.includes(name)) {
+      if (type === Array && usage.indexOf(name) > -1) {
         return child
       }
 
