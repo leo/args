@@ -123,6 +123,11 @@ class Args {
     Object.assign(args, this.raw)
     delete args._
 
+    for (let option of this.details.options) {
+      if (!option.defaultValue) continue
+      Object.assign(options, this.readOption(option))
+    }
+
     for (let option in args) {
       let related = this.isDefined(option, 'options')
 
