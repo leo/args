@@ -6,17 +6,20 @@ import { spawn } from 'child_process'
 
 class Args {
   constructor() {
+    // Will later hold registered options and commands
     this.details = {
       options: [],
       commands: []
     }
 
+    // Configuration defaults
     this.config = {
       help: true,
       version: true,
       errors: true
     }
 
+    // Register default options and commands
     this.option('help', 'Output usage information')
     this.command('help', 'Display help')
   }
@@ -24,6 +27,8 @@ class Args {
   option (name, description, init, defaultValue) {
     let usage = []
 
+    // If name is an array, pick the values
+    // Otherwise just use the whole thing
     switch (name.constructor) {
       case String:
         usage[0] = name.charAt(0)
@@ -37,6 +42,7 @@ class Args {
         throw new Error('Invalid name for option')
     }
 
+    // Throw error if short option is too long
     if (usage.length > 0 && usage[0].length > 1) {
       throw new Error('Short version of option is longer than 1 char')
     }
@@ -47,27 +53,35 @@ class Args {
       description
     }
 
+    // Set initializer depending on type of default value
     if (defaultValue) {
       let initFunction = typeof init === 'function'
       optionDetails.init = initFunction ? init : this.handleType(defaultValue)[1]
     }
 
+    // Register option to global scope
     this.details.options.push(optionDetails)
+
+    // Allow chaining of .option()
     return this
   }
 
   command (usage, description) {
+    // Register command to global scope
     this.details.commands.push({
       usage,
       description
     })
 
+    // Allow chaining of .command()
     return this
   }
 
   handleType (value) {
     const type = value.constructor
 
+    // Depending on the type of the default value,
+    // select a default initializer function
     switch (type) {
       case String:
         return ['[value]', toString]
@@ -87,6 +101,7 @@ class Args {
     let value = false,
         contents = {}
 
+    // If option has been used, get its value
     for (let name of option.usage) {
       let fromArgs = this.raw[name]
 
@@ -95,21 +110,27 @@ class Args {
       }
     }
 
+    // Process the option's value
     for (let name of option.usage) {
       let propVal = value || option.defaultValue,
           condition = true
 
       if (option.init) {
+        // Only use the toString initializer if value is a number
         if (option.init === toString) {
           condition = propVal.constructor === Number
         }
 
         if (condition) {
+          // Pass it through the initializer
           propVal = option.init(propVal)
         }
       }
 
+      // Camelcase option name
       name = camelcase(name)
+
+      // Add option to list if it has a value
       if (propVal) contents[name] = propVal
     }
 
@@ -120,6 +141,7 @@ class Args {
     let options = {},
         args = {}
 
+    // Copy over the arguments
     Object.assign(args, this.raw)
     delete args._
 
@@ -152,6 +174,7 @@ class Args {
   }
 
   generateDetails (kind) {
+    // Get all properties of kind from global scope
     const items = this.details[kind]
     let parts = []
 
@@ -159,14 +182,17 @@ class Args {
       let usage = items[item].usage,
           initial = items[item].defaultValue
 
+      // If usage is an array, show its contents
       if (usage.constructor === Array) {
         usage = `-${usage[0]}, --${usage[1]}`
         usage += initial ? ' ' + this.handleType(initial)[0] : ''
       }
 
+      // Overwrite usage with readable syntax
       items[item].usage = usage
     }
 
+    // Find length of longest option or command
     const longest = items.sort((a, b) => {
       return b.usage.length - a.usage.length
     })[0].usage.length
@@ -175,7 +201,10 @@ class Args {
       let usage = item.usage,
           difference = longest - usage.length
 
+      // Compensate the difference to longest property with spaces
       usage += ' '.repeat(difference)
+
+      // Add some space around it as well
       parts.push('  ' + usage + '  ' + item.description)
     }
 
@@ -183,11 +212,13 @@ class Args {
   }
 
   runCommand (name) {
+    // If command is "help", show usage information
     if (this.config.help && name === 'help') {
       this.showHelp()
       return
     }
 
+    // Generate full name of binary
     const full = this.binary + '-' + name
 
     let args = process.argv,
@@ -198,11 +229,13 @@ class Args {
       i++
     }
 
+    // Run binary of sub command
     this.child = spawn(full, args, {
       stdio: 'inherit',
       detached: true
     })
 
+    // Throw an error if something fails within that binary
     this.child.on('error', err => {
       throw err
     })
@@ -211,12 +244,17 @@ class Args {
   checkVersion () {
     const parent = module.parent
 
+    // Load parent module
     pkginfo(parent)
+
+    // And get its version propery
     const version = parent.exports.version
 
     if (version) {
+      // If it exists, register it as a default option
       this.option('version', 'Output the version number', version)
 
+      // And immediately output it if used in command line
       if (this.raw.v || this.raw.version) {
         console.log(version)
         process.exit()
@@ -225,8 +263,10 @@ class Args {
   }
 
   isDefined (name, list) {
+    // Get all items of kind
     const children = this.details[list]
 
+    // Check if a child matches the requested name
     for (let child of children) {
       let usage = child.usage,
           type = usage.constructor
@@ -240,15 +280,19 @@ class Args {
       }
     }
 
+    // If nothing matches, item is not defined
     return false
   }
 
   parse (argv, options) {
+    // Override default option values
     Object.assign(this.config, options)
 
+    // Parse arguments using minimist
     this.raw = parser(argv.slice(1))
     this.binary = path.basename(this.raw._[0])
 
+    // If default version is allowed, check for it
     if (this.config.version) {
       this.checkVersion()
     }
@@ -256,19 +300,24 @@ class Args {
     const subCommand = this.raw._[1] || false,
           helpTriggered = this.raw.h || this.raw.help
 
+    // If sub command is defined, run it
     if (this.isDefined(subCommand, 'commands')) {
       this.runCommand(subCommand)
       return {}
     }
 
+    // Show usage information if "help" or "h" option was used
+    // And respect the option related to it
     if (this.config.help && helpTriggered) {
       this.showHelp()
     }
 
+    // Hand back list of options
     return this.getOptions()
   }
 
   showHelp () {
+    // Remove dashes from binary name
     const binary = path.basename(this.raw._[0]).replace('-', ' ')
 
     let details = [
@@ -280,6 +329,7 @@ class Args {
       ''
     ]
 
+    // Get a list of all registered items
     const commands = this.generateDetails('commands'),
           options = this.generateDetails('options')
 
@@ -294,6 +344,7 @@ class Args {
       ''
     )
 
+    // And finally, merge and output them
     console.log(details.join('\n  '))
     process.exit()
   }
