@@ -1,4 +1,4 @@
-# args [![Gitter](https://badges.gitter.im/leo/args.svg)](https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/leo/args.svg?branch=master)](https://travis-ci.org/leo/args)
+# args [![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build]
 
 This package makes creating command line interfaces a breeze.
 
@@ -139,3 +139,8 @@ As always, you can run the [AVA](https://github.com/sindresorhus/ava) tests usin
 ## Special thanks
 
 ... to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content (before I've added my stuff) of the package, you can find it [here](https://github.com/dimsmol/args).
+
+[build]: https://travis-ci.org/leo/args
+[build-badge]: https://travis-ci.org/leo/args.svg?branch=master
+[chat]: https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[chat-badge]: https://badges.gitter.im/leo/args.svg
