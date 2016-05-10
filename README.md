@@ -96,9 +96,9 @@ The methods also returns all options that have been used and their respective va
 - **argv:** Should be the process' argv: `process.argv`, for example.
 - **options:** This parameter accepts an object containing several [configuration options](#configuration).
 
-### .raw
+### .sub
 
-This property exposes all arguments that have been parsed by [minimist](https://npmjs.com/minimist). This is useful when trying to get the value after the command, for example:
+This property exposes all sub arguments that have been parsed by [minimist](https://npmjs.com/minimist). This is useful when trying to get the value after the command, for example:
 
 ```bash
 serve ./directory
@@ -108,7 +108,7 @@ The upper path can now be loaded by doing:
 
 ```js
 // Contains "./directory"
-const path = args.raw._[1]
+const path = args.sub[0]
 ```
 
 ### .showHelp()
