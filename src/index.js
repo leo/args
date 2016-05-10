@@ -179,8 +179,10 @@ class Args {
 
       // If usage is an array, show its contents
       if (usage.constructor === Array) {
+        let isVersion = usage.indexOf('v')
+
         usage = `-${usage[0]}, --${usage[1]}`
-        usage += initial ? ' ' + this.handleType(initial)[0] : ''
+        usage += (initial && isVersion == -1) ? ' ' + this.handleType(initial)[0] : ''
       }
 
       // Overwrite usage with readable syntax
