@@ -98,6 +98,8 @@ function aCommand (name, sub, options) {
 }
 ```
 
+Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
+
 ### .parse(argv, options)
 
 This method takes the process' command line arguments (command and options) and uses the internal methods to get their values and assign them to the current instance of args. It needs to be run after all of the `.option` and `.command` calls. If you run it before them, the method calls after it won't take effect.
