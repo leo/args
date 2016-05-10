@@ -25,10 +25,7 @@
       "add-module-exports"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leo/args.git"
-  },
+  "repository": "leo/args",
   "keywords": [
     "cli"
     "command",
