@@ -334,7 +334,7 @@ class Args {
 
   showHelp () {
     // Remove dashes from binary name
-    const binary = path.basename(this.raw._[0]).replace('-', ' ')
+    const binary = this.binary.replace('-', ' ')
 
     let details = [
       '',
