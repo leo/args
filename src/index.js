@@ -25,7 +25,7 @@ class Args {
 
     // Register default options and commands
     this.option('help', 'Output usage information')
-    this.command('help', 'Display help')
+    this.command('help', 'Display help', this.showHelp)
   }
 
   option (name, description, defaultValue, init) {
@@ -70,11 +70,12 @@ class Args {
     return this
   }
 
-  command (usage, description) {
+  command (usage, description, init) {
     // Register command to global scope
     this.details.commands.push({
       usage,
-      description
+      description,
+      init
     })
 
     // Allow chaining of .command()
@@ -209,15 +210,22 @@ class Args {
     return parts
   }
 
-  runCommand (name) {
-    // If command is "help", show usage information
-    if (this.config.help && name === 'help') {
-      this.showHelp()
-      return
+  runCommand (details, options) {
+    // If help is disabled, remove initializer
+    if (details.usage === 'help' && !this.config.help) {
+      details.init = false
+    }
+
+    // If command has initializer, call it
+    if (details.init) {
+      let sub = [].concat(this.sub)
+      sub.shift()
+
+      return details.init.bind(this)(details.usage, sub, options)
     }
 
     // Generate full name of binary
-    const full = this.binary + '-' + name
+    const full = this.binary + '-' + details.usage
 
     let args = process.argv,
         i = 0
@@ -298,9 +306,19 @@ class Args {
     const subCommand = this.raw._[1] || false,
           helpTriggered = this.raw.h || this.raw.help
 
+    let args = {},
+        defined = this.isDefined(subCommand, 'commands'),
+        optionList = this.getOptions()
+
+    Object.assign(args, this.raw)
+    args._.shift()
+
+    // Export sub arguments of command
+    this.sub = args._
+
     // If sub command is defined, run it
-    if (this.isDefined(subCommand, 'commands')) {
-      this.runCommand(subCommand)
+    if (defined) {
+      this.runCommand(defined, optionList)
       return {}
     }
 
@@ -310,15 +328,8 @@ class Args {
       this.showHelp()
     }
 
-    let args = {}
-    Object.assign(args, this.raw)
-    args._.shift()
-
-    // Export sub arguments of command
-    this.sub = args._
-
     // Hand back list of options
-    return this.getOptions()
+    return optionList
   }
 
   showHelp () {
