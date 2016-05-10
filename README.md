@@ -80,7 +80,7 @@ Register a new option for the binary in which it's being called.
 - **default:** If it's defined, args will not only use it as a default value for the property, but it will also determine the type and append it to the usage info when the help gets outputted. For example: If the default param of an option named "package" contains an array, the usage information will look like this: `-p, --package <list>`.
 - **init:** A function through which the option's value will be passed when used. The first paramater within said function will contain the option's value. If the parameter "default" is defined, args will provide a default initializer depending on the type of its value. For example: If "default" contains an integer, "init" will be "parseInt".
 
-### .command(name, description)
+### .command(name, description, init)
 
 Register a new sub command. Args requires all binaries to be defined in the style of git's. That means each sub command should be a separate binary called "&#60;parent-command&#62;-&#60;sub-command&#62;".
 
@@ -88,6 +88,15 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 
 - **name:** Takes a string which defines the name of the command. This value will be used when outputting the help.
 - **description:** A short explanation of what the command shall be used for. Will be outputted along with help.
+- **init:** If a function was passed through at this parameter, args will call it instead of running the binary related to that command. The function receives three arguments:
+
+```js
+function aCommand (name, sub, options) {
+  name // The name of the command
+  sub // The output of .sub
+  options // An object containing the options that have been used
+}
+```
 
 ### .parse(argv, options)
 
