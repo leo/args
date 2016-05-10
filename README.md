@@ -142,7 +142,6 @@ By default, the module already registers some default options (e.g. "version" an
 | -------- | ----------- | ------------- |
 | help     | Automatically render the usage information when running `help`, `-h` or `--help` | true |
 | version  | Outputs the version tag of your package.json | true |
-| error    | Raise an error if an option isn't defined | true |
 
 You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
 

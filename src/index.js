@@ -16,8 +16,7 @@ class Args {
     // Configuration defaults
     this.config = {
       help: true,
-      version: true,
-      errors: true
+      version: true
     }
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
@@ -163,9 +162,6 @@ class Args {
       if (related) {
         let details = this.readOption(related)
         Object.assign(options, details)
-      } else if (this.config.errors) {
-        // Throw an error if option not defined
-        console.error(`Option "${option}" not known`)
       }
     }
 
