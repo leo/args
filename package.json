@@ -30,11 +30,22 @@
     "url": "git+https://github.com/leo/args.git"
   },
   "keywords": [
+    "cli"
     "command",
-    "line",
     "arguments",
+    "util",
+    "bin",
     "commander",
-    "minimist"
+    "minimist",
+    "binary",
+    "parser",
+    "option",
+    "flags",
+    "cmd",
+    "utility",
+    "helper"
+    "terminal",
+    "console"
   ],
   "author": "leo",
   "license": "MIT",
