@@ -8,10 +8,10 @@ test('options', t => {
     .option('port', 'The port on which the site will run')
     .option(['d', 'data'], 'The data that shall be used')
 
-  const properties = args.parse(argv)
+  const config = args.parse(argv)
 
-  for (let property in properties) {
-    let content = properties[property]
+  for (let property in config) {
+    let content = config[property]
 
     switch (content) {
       case '1.0.0':
