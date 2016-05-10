@@ -35,7 +35,7 @@ args
   .option('reload', 'Enable/disable livereloading')
   .command('serve', 'Serve your static site')
 
-const config = args.parse(process.argv)
+const flags = args.parse(process.argv)
 ```
 
 The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So if you want to check for the value of the "port" option, just do this:
@@ -43,8 +43,8 @@ The upper code defines two options called "port" and "reload" for the current bi
 ```js
 // This also works with "config.p", because the short name of the "port" option is "p"
 
-if (config.port) {
-  console.log(`I'll be running on port ${config.port}`)
+if (flags.port) {
+  console.log(`I'll be running on port ${flags.port}`)
 }
 ```
 
