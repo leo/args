@@ -74,7 +74,7 @@ class Args {
     this.details.commands.push({
       usage,
       description,
-      init
+      init: typeof init === 'function' ? init : false
     })
 
     // Allow chaining of .command()
