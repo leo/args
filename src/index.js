@@ -3,6 +3,7 @@ import pkginfo from 'pkginfo'
 import camelcase from 'camelcase'
 import path from 'path'
 import { spawn } from 'child_process'
+import loudRejection from 'loud-rejection'
 
 class Args {
   constructor() {
@@ -18,6 +19,9 @@ class Args {
       version: true,
       errors: true
     }
+
+    // Make unhandled promise rejections fail loudly instead of the default silent fail
+    loudRejection()
 
     // Register default options and commands
     this.option('help', 'Output usage information')
