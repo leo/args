@@ -101,7 +101,7 @@ The methods also returns all options that have been used and their respective va
 This property exposes all sub arguments that have been parsed by [minimist](https://npmjs.com/minimist). This is useful when trying to get the value after the command, for example:
 
 ```bash
-serve ./directory
+pizza ./directory
 ```
 
 The upper path can now be loaded by doing:
@@ -109,6 +109,12 @@ The upper path can now be loaded by doing:
 ```js
 // Contains "./directory"
 const path = args.sub[0]
+```
+
+This also works completely fine with sub commands: Assuming that you've registered a new command using `.command()`, you can easily check the following sub argument within its binary like mentioned above:
+
+```bash
+pizza eat ./directory
 ```
 
 ### .showHelp()
