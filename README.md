@@ -4,6 +4,8 @@ This package makes creating command line interfaces a breeze.
 
 While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://npmjs.com/minimist) for all of the actual parsing.
 
+If you'd like to ask the user for input, you can use args in combination with something like [inquirer](https://npmjs.com/inquirer).
+
 ## Features
 
 - Git-style sub commands (e.g. "pizza-cheese")
