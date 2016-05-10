@@ -28,7 +28,7 @@ class Args {
     this.command('help', 'Display help')
   }
 
-  option (name, description, init, defaultValue) {
+  option (name, description, defaultValue, init) {
     let usage = []
 
     // If name is an array, pick the values

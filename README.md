@@ -69,14 +69,14 @@ In turn, this is how the auto-generated usage information will look like:
 
 ## API
 
-### .option(name, description, init, default)
+### .option(name, description, default, init)
 
 Register a new option for the binary in which it's being called.
 
 - **name:** Takes a string which defines the name of the option. In this case, the first letter will be used as the short version (`port` => `-p, --port`). However, it can also be an array in which the first value defines the short version (`p` => `-p`) and the second one the long version (`packages` => `--packages`).
 - **description:** A short explanation of what the option shall be used for. Will be outputted along with help.
-- **init:** A function through which the option's value will be passed when used. The first paramater within said function will contain the option's value. If the parameter "default" is defined, args will provide a default initializer depending on the type of its value. For example: If "default" contains an integer, "init" will be "parseInt".
 - **default:** If it's defined, args will not only use it as a default value for the property, but it will also determine the type and append it to the usage info when the help gets outputted. For example: If the default param of an option named "package" contains an array, the usage information will look like this: `-p, --package <list>`.
+- **init:** A function through which the option's value will be passed when used. The first paramater within said function will contain the option's value. If the parameter "default" is defined, args will provide a default initializer depending on the type of its value. For example: If "default" contains an integer, "init" will be "parseInt".
 
 ### .command(name, description)
 

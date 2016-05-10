@@ -11,7 +11,15 @@ test('options', t => {
   const properties = args.parse(argv)
 
   for (let property in properties) {
-    t.true(properties[property])
+    let content = properties[property]
+
+    switch (content) {
+      case '1.0.0':
+        t.is(content, '1.0.0')
+        break
+      default:
+        t.true(content)
+    }
   }
 })
 
