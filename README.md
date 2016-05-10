@@ -111,7 +111,7 @@ The upper path can now be loaded by doing:
 const path = args.sub[0]
 ```
 
-This also works completely fine with sub commands: Assuming that you've registered a new command using `.command()`, you can easily check the following sub argument within its binary like mentioned above:
+This also works completely fine with sub commands: After you've registered a new command using `.command()`, you can easily check the following sub argument within its binary like mentioned above:
 
 ```bash
 pizza eat ./directory
