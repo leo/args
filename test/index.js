@@ -1,5 +1,6 @@
 import test from 'ava'
 import args from '../dist'
+import { version } from '../package.json'
 
 const argv = ['node', 'foo', '-p', '--data']
 
@@ -14,8 +15,8 @@ test('options', t => {
     let content = config[property]
 
     switch (content) {
-      case '1.0.0':
-        t.is(content, '1.0.0')
+      case version:
+        t.is(content, version)
         break
       default:
         t.true(content)
