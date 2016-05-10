@@ -168,12 +168,6 @@ class Args {
       }
     }
 
-    // Assign options to current instance
-    // Will be dropped in 1.0.0
-    for (let option in options) {
-      this[option] = options[option]
-    }
-
     return options
   }
 

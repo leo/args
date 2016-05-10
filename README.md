@@ -11,7 +11,7 @@ While there might be many alternatives out there, all ones I used are still base
 - Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
 - Clean [syntax](#usage) for defining options and commands
 - The core only contains a [few hundred lines](src/index.js) of code (even after transpiling)
-- Easily retrieve values of options: `args.option`
+- Easily [retrieve](#usage) values of options
 
 ## Usage
 
@@ -33,16 +33,16 @@ args
   .option('reload', 'Enable/disable livereloading')
   .command('serve', 'Serve your static site')
 
-args.parse(process.argv)
+const config = args.parse(process.argv)
 ```
 
 The upper code defines two options called "port" and "reload" for the current binary, as well as a new sub command named "serve". So if you want to check for the value of the "port" option, just do this:
 
 ```js
-// This also works with "args.p", because the short name of the "port" option is "p"
+// This also works with "config.p", because the short name of the "port" option is "p"
 
-if (args.port) {
-  console.log(`I'll be running on port ${args.port}`)
+if (config.port) {
+  console.log(`I'll be running on port ${config.port}`)
 }
 ```
 
