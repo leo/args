@@ -310,6 +310,13 @@ class Args {
       this.showHelp()
     }
 
+    let args = {}
+    Object.assign(args, this.raw)
+    args._.shift()
+
+    // Export sub arguments of command
+    this.sub = args._
+
     // Hand back list of options
     return this.getOptions()
   }
