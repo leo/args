@@ -333,25 +333,35 @@ class Args {
   }
 
   showHelp () {
-    // Remove dashes from binary name
-    const binary = this.binary.replace('-', ' ')
-    const firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
+    const binary = this.binary.replace('-', ' '),
+          firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
 
     let parts = []
 
-    const groups = [
-      'commands',
-      'options'
-    ]
+    let groups = {
+      commands: true,
+      options: true
+    }
+
+    for (let group in groups) {
+      if (this.details[group].length > 0) {
+        continue
+      }
+
+      groups[group] = false
+    }
+
+    const optionHandle = (groups.options ? ' [options]' : ''),
+          cmdHandle = (groups.commands ? ' [command]' : '')
 
     parts.push([
       '',
-      `Usage: ${binary} [options] [command]`,
+      `Usage: ${binary}` + optionHandle + cmdHandle,
       ''
     ])
 
-    for (let group of groups) {
-      if (this.details[group].length === 0) {
+    for (let group in groups) {
+      if (!groups[group]) {
         continue
       }
 
