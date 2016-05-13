@@ -32,6 +32,9 @@
       "babel-preset-es2015-node"
     ]
   },
+  "engines": {
+    "node": ">= 4.4.4"
+  },
   "keywords": [
     "cli",
     "command",
