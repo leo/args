@@ -336,32 +336,46 @@ class Args {
     // Remove dashes from binary name
     const binary = this.binary.replace('-', ' ')
 
-    let details = [
+    let parts = [],
+        output
+
+    parts.push([
       '',
       `Usage: ${binary} [options] [command]`,
-      '',
-      '',
-      'Commands:',
       ''
-    ]
+    ])
 
-    // Get a list of all registered items
-    const commands = this.generateDetails('commands'),
-          options = this.generateDetails('options')
+    if (this.details.commands.length > 0) {
+      parts.push([
+        '',
+        'Commands:',
+        '',
+        ''
+      ])
 
-    details = details.concat(
-      commands,
-      [
+      parts.push(this.generateDetails('commands'))
+      parts.push(['', ''])
+    }
+
+    if (this.details.options.length > 0) {
+      parts.push([
         '',
         'Options:',
+        '',
         ''
-      ],
-      options,
-      ''
-    )
+      ])
 
-    // And finally, merge and output them
-    console.log(details.join('\n  '))
+      parts.push(this.generateDetails('options'))
+      parts.push(['', ''])
+    }
+
+    // And finally, merge...
+    for (let part of parts) {
+      output += part.join('\n  ')
+    }
+
+    /// ...and output them
+    console.log(output)
     process.exit()
   }
 }
