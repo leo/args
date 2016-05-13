@@ -26,6 +26,12 @@
     ]
   },
   "repository": "leo/args",
+  "greenkeeper": {
+    "emails": false,
+    "ignore": [
+      "babel-preset-es2015-node"
+    ]
+  },
   "keywords": [
     "cli",
     "command",
