@@ -8,7 +8,7 @@ If you'd like to ask the user for input, you can use args in combination with so
 
 ## Features
 
-- Git-style sub commands (e.g. "pizza-cheese")
+- Git-style sub commands (e.g. `pizza cheese` executes the "pizza-cheese" binary)
 - Auto-generated usage information
 - Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
 - Clean [syntax](#usage) for defining options and commands
