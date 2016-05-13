@@ -335,9 +335,14 @@ class Args {
   showHelp () {
     // Remove dashes from binary name
     const binary = this.binary.replace('-', ' ')
+    const firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
 
-    let parts = [],
-        output = ''
+    let parts = []
+
+    const groups = [
+      'commands',
+      'options'
+    ]
 
     parts.push([
       '',
@@ -345,29 +350,23 @@ class Args {
       ''
     ])
 
-    if (this.details.commands.length > 0) {
+    for (let group of groups) {
+      if (this.details[group].length === 0) {
+        continue
+      }
+
       parts.push([
         '',
-        'Commands:',
+        firstBig(group) + ':',
         '',
         ''
       ])
 
-      parts.push(this.generateDetails('commands'))
+      parts.push(this.generateDetails(group))
       parts.push(['', ''])
     }
 
-    if (this.details.options.length > 0) {
-      parts.push([
-        '',
-        'Options:',
-        '',
-        ''
-      ])
-
-      parts.push(this.generateDetails('options'))
-      parts.push(['', ''])
-    }
+    let output = ''
 
     // And finally, merge...
     for (let part of parts) {
