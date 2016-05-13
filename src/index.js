@@ -351,8 +351,8 @@ class Args {
       groups[group] = false
     }
 
-    const optionHandle = (groups.options ? ' [options]' : ''),
-          cmdHandle = (groups.commands ? ' [command]' : '')
+    const optionHandle = groups.options ? ' [options]' : '',
+          cmdHandle = groups.commands ? ' [command]' : ''
 
     parts.push([
       '',
@@ -378,12 +378,15 @@ class Args {
 
     let output = ''
 
-    // And finally, merge...
+    // And finally, merge and output them
     for (let part of parts) {
       output += part.join('\n  ')
     }
 
-    /// ...and output them
+    if (!groups.commands && !groups.options) {
+      output = 'No sub commands or options available'
+    }
+
     console.log(output)
     process.exit()
   }
