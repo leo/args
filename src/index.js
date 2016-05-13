@@ -337,7 +337,7 @@ class Args {
     const binary = this.binary.replace('-', ' ')
 
     let parts = [],
-        output
+        output = ''
 
     parts.push([
       '',
