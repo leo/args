@@ -21,10 +21,6 @@ class Args {
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
     loudRejection()
-
-    // Register default options and commands
-    this.option('help', 'Output usage information')
-    this.command('help', 'Display help', this.showHelp)
   }
 
   option (name, description, defaultValue, init) {
@@ -291,6 +287,12 @@ class Args {
   parse (argv, options) {
     // Override default option values
     Object.assign(this.config, options)
+
+    if (this.config.help) {
+      // Register default options and commands
+      this.option('help', 'Output usage information')
+      this.command('help', 'Display help', this.showHelp)
+    }
 
     // Parse arguments using minimist
     this.raw = parser(argv.slice(1))
