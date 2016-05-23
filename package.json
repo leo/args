@@ -86,6 +86,9 @@
       ],
       "no-var": [
         "error"
+      ],
+      "eol-last": [
+        "error"
       ]
     }
   },
