@@ -63,7 +63,7 @@
     },
     "rules": {
       "quotes": [
-        2,
+        "error",
         "single",
         {
           "allowTemplateLiterals": true
@@ -80,6 +80,9 @@
             "const": 3
           }
         }
+      ],
+      "no-trailing-spaces": [
+        "error"
       ]
     }
   },
