@@ -83,6 +83,9 @@
       ],
       "no-trailing-spaces": [
         "error"
+      ],
+      "no-var": [
+        "error"
       ]
     }
   },
