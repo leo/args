@@ -152,7 +152,7 @@ You can pass the configuration object as the second paramater of [.parse()](#par
 3. Transpile the source code and watch for changes: `gulp`
 4. Within the module you want to test your local development instance of args, just link it to the dependencies: `npm link args`. Instead of the default one from npm, node will now use your clone of args!
 
-As always, you can run the [AVA](https://github.com/sindresorhus/ava) tests using: `npm test`
+As always, you can run the [AVA](https://github.com/sindresorhus/ava) and [ESLint](http://eslint.org) tests using: `npm test`
 
 ## Special thanks
 
