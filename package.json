@@ -53,6 +53,24 @@
     "terminal",
     "console"
   ],
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single",
+        {
+          "allowTemplateLiterals": true
+        }
+      ]
+    }
+  },
   "author": "leo",
   "license": "MIT",
   "bugs": {
