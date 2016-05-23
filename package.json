@@ -54,51 +54,7 @@
     "console"
   ],
   "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 7,
-      "sourceType": "module"
-    },
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "quotes": [
-        2,
-        "single",
-        {
-          "allowTemplateLiterals": true
-        }
-      ],
-      "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1,
-          "VariableDeclarator": {
-            "var": 2,
-            "let": 2,
-            "const": 3
-          }
-        }
-      ],
-      "no-trailing-spaces": [
-        2
-      ],
-      "no-var": [
-        2
-      ],
-      "eol-last": [
-        2
-      ],
-      "semi": [
-        2,
-        "never"
-      ],
-      "space-before-function-paren": [
-        2,
-        "always"
-      ]
-    }
+    "extends": "default"
   },
   "author": "leo",
   "license": "MIT",
@@ -111,6 +67,7 @@
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-preset-es2015-node": "^4.0.2",
     "eslint": "^2.10.2",
+    "eslint-config-default": "^0.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0"
