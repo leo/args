@@ -10,7 +10,7 @@
     "start": "gulp",
     "prepublish": "gulp transpile",
     "pretest": "gulp transpile",
-    "test": "ava"
+    "test": "ava && eslint src/**"
   },
   "ava": {
     "files": [
@@ -63,6 +63,7 @@
     "ava": "^0.14.0",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-preset-es2015-node": "^4.0.2",
+    "eslint": "^2.10.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0"
