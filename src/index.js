@@ -6,7 +6,7 @@ import { spawn } from 'child_process'
 import loudRejection from 'loud-rejection'
 
 class Args {
-  constructor() {
+  constructor () {
     // Will later hold registered options and commands
     this.details = {
       options: [],
