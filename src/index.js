@@ -391,7 +391,7 @@ class Args {
     const usageFilter = this.config.usageFilter
 
     if (typeof usageFilter === 'function') {
-      output = usageFilter(output)
+      output = usageFilter(output) || output
     }
 
     console.log(output)
