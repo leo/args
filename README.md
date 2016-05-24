@@ -138,7 +138,7 @@ Outputs the usage information based on the options and comments you've registere
 
 By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties:
 
-| Property | Description | Default value | Type |
+| Property | Description | Default&nbsp;value | Type |
 | -------- | ----------- | ------------- | ---- |
 | help | Automatically render the usage information when running `help`, `-h` or `--help` | true | boolean |
 | version | Outputs the version tag of your package.json | true | boolean |
