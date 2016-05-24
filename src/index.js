@@ -17,7 +17,8 @@ class Args {
     this.config = {
       help: true,
       version: true,
-      usageFilter: null
+      usageFilter: null,
+      value: null
     }
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
@@ -353,11 +354,12 @@ class Args {
     }
 
     const optionHandle = groups.options ? ' [options]' : '',
-          cmdHandle = groups.commands ? ' [command]' : ''
+          cmdHandle = groups.commands ? ' [command]' : '',
+          value = typeof this.config.value === 'string' ? ' ' + this.config.value : ''
 
     parts.push([
       '',
-      `Usage: ${binary}` + optionHandle + cmdHandle,
+      `Usage: ${binary}` + optionHandle + cmdHandle + value,
       ''
     ])
 
