@@ -16,7 +16,8 @@ class Args {
     // Configuration defaults
     this.config = {
       help: true,
-      version: true
+      version: true,
+      usageFilter: null
     }
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
@@ -385,6 +386,12 @@ class Args {
 
     if (!groups.commands && !groups.options) {
       output = 'No sub commands or options available'
+    }
+
+    const usageFilter = this.config.usageFilter
+
+    if (typeof usageFilter === 'function') {
+      output = usageFilter(output)
     }
 
     console.log(output)
