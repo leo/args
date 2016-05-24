@@ -140,9 +140,10 @@ By default, the module already registers some default options (e.g. "version" an
 
 | Property | Description | Default&nbsp;value | Type |
 | -------- | ----------- | ------------- | ---- |
-| help | Automatically render the usage information when running `help`, `-h` or `--help` | true | boolean |
-| version | Outputs the version tag of your package.json | true | boolean |
-| usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | function |
+| help | Automatically render the usage information when running `help`, `-h` or `--help` | true | Boolean |
+| version | Outputs the version tag of your package.json | true | Boolean |
+| usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
+| value | Suffix for the "Usage" section of the usage information | null | String |
 
 You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
 
