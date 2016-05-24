@@ -390,6 +390,7 @@ class Args {
 
     const usageFilter = this.config.usageFilter
 
+    // If filter is available, pass usage information through
     if (typeof usageFilter === 'function') {
       output = usageFilter(output) || output
     }
