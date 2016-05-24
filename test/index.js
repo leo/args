@@ -24,6 +24,20 @@ test('options', t => {
   }
 })
 
+test('usage information', t => {
+  const filter = data => data
+
+  args.parse(argv, {
+    value: '<directories>',
+    usageFilter: filter
+  })
+
+  const runner = args.config.usageFilter,
+        value = 'a test'
+
+  t.is(runner(value), value)
+})
+
 test('config', t => {
   const runner = args.parse(argv, {
     help: false,
