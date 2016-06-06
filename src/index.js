@@ -4,6 +4,7 @@ import camelcase from 'camelcase'
 import path from 'path'
 import { spawn } from 'child_process'
 import loudRejection from 'loud-rejection'
+import replace from 'replaceall'
 
 class Args {
   constructor () {
@@ -191,6 +192,15 @@ class Args {
     const longest = items.sort((a, b) => {
       return b.usage.length - a.usage.length
     })[0].usage.length
+
+    items.sort((a, b) => {
+      let first = a.usage.split('-')[3],
+          second = b.usage.split('-')[3]
+
+      if (first < second) return -1
+      if (first > second) return 1
+      return 0
+    })
 
     for (let item of items) {
       let usage = item.usage,
