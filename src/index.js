@@ -179,10 +179,11 @@ class Args {
       let first = isCmd ? a.usage : a.usage[1],
           second = isCmd ? b.usage : b.usage[1]
 
-      if (first < second) return -1
-      if (first > second) return 1
-
-      return 0
+      switch (true) {
+        case (first < second): return -1
+        case (first > second): return 1
+        default: return 0
+      }
     })
 
     for (let item in items) {
