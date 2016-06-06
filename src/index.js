@@ -55,8 +55,22 @@ class Args {
       description
     }
 
+    let defaultIsWrong = false
+
+    switch (defaultValue) {
+      case false:
+        defaultIsWrong = true
+        break
+      case null:
+        defaultIsWrong = true
+        break
+      case undefined:
+        defaultIsWrong = true
+        break
+    }
+
     // Set initializer depending on type of default value
-    if (defaultValue) {
+    if (!defaultIsWrong) {
       let initFunction = typeof init === 'function'
       optionDetails.init = initFunction ? init : this.handleType(defaultValue)[1]
     }
@@ -81,18 +95,24 @@ class Args {
   }
 
   handleType (value) {
-    const type = value.constructor
+    let type = value
+
+    if (typeof value !== 'function') {
+      type = value.constructor
+    }
 
     // Depending on the type of the default value,
     // select a default initializer function
     switch (type) {
       case String:
+      case toString:
         return ['[value]', toString]
         break
       case Array:
         return ['<list>']
         break
       case Number:
+      case parseInt:
         return ['<n>', parseInt]
         break
       default:
@@ -193,8 +213,12 @@ class Args {
       // If usage is an array, show its contents
       if (usage.constructor === Array) {
         let isVersion = usage.indexOf('v')
-
         usage = `-${usage[0]}, --${usage[1]}`
+
+        if (!initial) {
+          initial = items[item].init
+        }
+
         usage += (initial && isVersion == -1) ? ' ' + this.handleType(initial)[0] : ''
       }
 
