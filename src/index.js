@@ -5,6 +5,7 @@ import path from 'path'
 import { spawn } from 'child_process'
 import loudRejection from 'loud-rejection'
 import replace from 'replaceall'
+import chalk from 'chalk'
 
 class Args {
   constructor () {
@@ -240,7 +241,7 @@ class Args {
       usage += ' '.repeat(difference)
 
       // Add some space around it as well
-      parts.push('  ' + usage + '  ' + item.description)
+      parts.push('  ' + chalk.blue(usage) + '  ' + chalk.gray(item.description))
     }
 
     return parts
@@ -399,7 +400,7 @@ class Args {
 
     parts.push([
       '',
-      `Usage: ${binary}` + optionHandle + cmdHandle + value,
+      chalk.black('Usage: ') + chalk.blue(binary) + chalk.gray(optionHandle + cmdHandle + value),
       ''
     ])
 
