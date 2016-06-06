@@ -172,6 +172,19 @@ class Args {
     const items = this.details[kind]
     let parts = []
 
+    // Sort items alphabetically
+    items.sort((a, b) => {
+      const isCmd = kind == 'commands'
+
+      let first = isCmd ? a.usage : a.usage[1],
+          second = isCmd ? b.usage : b.usage[1]
+
+      if (first < second) return -1
+      if (first > second) return 1
+
+      return 0
+    })
+
     for (let item in items) {
       let usage = items[item].usage,
           initial = items[item].defaultValue
@@ -189,18 +202,10 @@ class Args {
     }
 
     // Find length of longest option or command
-    const longest = items.sort((a, b) => {
+    // Before doing that, make a copy of the original array
+    const longest = items.slice().sort((a, b) => {
       return b.usage.length - a.usage.length
     })[0].usage.length
-
-    items.sort((a, b) => {
-      let first = a.usage.split('-')[3],
-          second = b.usage.split('-')[3]
-
-      if (first < second) return -1
-      if (first > second) return 1
-      return 0
-    })
 
     for (let item of items) {
       let usage = item.usage,
