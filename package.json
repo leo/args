@@ -10,7 +10,7 @@
     "start": "gulp",
     "prepublish": "gulp transpile",
     "pretest": "gulp transpile",
-    "test": "ava && eslint src/** test/** gulpfile.js"
+    "test": "ava && eslint src/** test/** *.js"
   },
   "ava": {
     "files": [
