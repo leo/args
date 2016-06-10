@@ -241,7 +241,7 @@ class Args {
       usage += ' '.repeat(difference)
 
       // Add some space around it as well
-      parts.push('  ' + chalk.blue(usage) + '  ' + chalk.gray(item.description))
+      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(item.description))
     }
 
     return parts
@@ -400,7 +400,7 @@ class Args {
 
     parts.push([
       '',
-      chalk.black('Usage: ') + chalk.blue(binary) + chalk.gray(optionHandle + cmdHandle + value),
+      'Usage: ' + chalk.yellow(binary) + chalk.dim(optionHandle + cmdHandle + value),
       ''
     ])
 
