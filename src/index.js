@@ -346,7 +346,7 @@ class Args {
       this.checkVersion()
     }
 
-    const subCommand = this.raw._[1] || false,
+    const subCommand = this.raw._[1],
           helpTriggered = this.raw.h || this.raw.help
 
     let args = {},
