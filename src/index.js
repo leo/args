@@ -27,6 +27,21 @@ class Args {
     loudRejection()
   }
 
+  options (list) {
+    if (list.constructor != Array) {
+      throw new Error('Item passed to .options is not an array')
+    }
+
+    for (let item of list) {
+      let preset = item.defaultValue || false,
+          init = item.init || false
+
+      this.option(item.name, item.description, preset, init)
+    }
+
+    return this
+  }
+
   option (name, description, defaultValue, init) {
     let usage = []
 
