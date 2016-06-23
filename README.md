@@ -80,6 +80,21 @@ Register a new option for the binary in which it's being called.
 - **default:** If it's defined, args will not only use it as a default value for the property, but it will also determine the type and append it to the usage info when the help gets outputted. For example: If the default param of an option named "package" contains an array, the usage information will look like this: `-p, --package <list>`.
 - **init:** A function through which the option's value will be passed when used. The first paramater within said function will contain the option's value. If the parameter "default" is defined, args will provide a default initializer depending on the type of its value. For example: If "default" contains an integer, "init" will be `parseInt`.
 
+### .options(list)
+
+Takes in an array of objects that are each defining an option that shall be registered. This is basically a minimalistic way to register a huge list of options at once. Here's what each option object needs to look like:
+
+```js
+{
+  name: 'port',
+  description: 'The port on which the app runs',
+  init: content => content,
+  defaultValue: 3000
+}
+```
+
+However, the keys `init` and `defaultValue` are not strictly required.
+
 ### .command(name, description, init)
 
 Register a new sub command. Args requires all binaries to be defined in the style of git's. That means each sub command should be a separate binary called "&#60;parent-command&#62;-&#60;sub-command&#62;".
