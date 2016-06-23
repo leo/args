@@ -122,7 +122,7 @@ class Args {
     switch (type) {
       case String:
       case toString:
-        return ['[value]', toString]
+        return ['[value]']
         break
       case Array:
         return ['<list>']
