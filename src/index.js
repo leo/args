@@ -289,8 +289,7 @@ class Args {
 
     // Run binary of sub command
     this.child = spawn(full, args, {
-      stdio: 'inherit',
-      detached: true
+      stdio: 'inherit'
     })
 
     // Throw an error if something fails within that binary
