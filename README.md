@@ -180,3 +180,8 @@ As always, you can run the [AVA](https://github.com/sindresorhus/ava) and [ESLin
 [build-badge]: https://travis-ci.org/leo/args.svg?branch=master
 [chat]: https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 [chat-badge]: https://badges.gitter.im/leo/args.svg
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/leo/args/badge.svg?style=beer-square)](https://beerpay.io/leo/args)  [![Beerpay](https://beerpay.io/leo/args/make-wish.svg?style=flat-square)](https://beerpay.io/leo/args?focus=wish)
