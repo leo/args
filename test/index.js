@@ -1,8 +1,16 @@
+// Packages
 import test from 'ava'
+
+// Ours
 import args from '../dist'
 import { version } from '../package.json'
 
-const argv = ['node', 'foo', '-p', '--data']
+const argv = [
+  'node',
+  'foo',
+  '-p',
+  '--data'
+]
 
 test('options', t => {
   args
