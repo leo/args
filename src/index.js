@@ -1,17 +1,16 @@
+// Native
+import path from 'path'
+import {spawn} from 'child_process'
+
 // Packages
 import parser from 'minimist'
 import pkginfo from 'pkginfo'
 import loudRejection from 'loud-rejection'
 import camelcase from 'camelcase'
-import replace from 'replaceall'
 import chalk from 'chalk'
 
-// Native
-import path from 'path'
-import { spawn } from 'child_process'
-
 class Args {
-  constructor () {
+  constructor() {
     // Will later hold registered options and commands
     this.details = {
       options: [],
@@ -30,14 +29,14 @@ class Args {
     loudRejection()
   }
 
-  options (list) {
-    if (list.constructor != Array) {
+  options(list) {
+    if (list.constructor !== Array) {
       throw new Error('Item passed to .options is not an array')
     }
 
-    for (let item of list) {
-      let preset = item.defaultValue || false,
-          init = item.init || false
+    for (const item of list) {
+      const preset = item.defaultValue || false
+      const init = item.init || false
 
       this.option(item.name, item.description, preset, init)
     }
@@ -45,7 +44,7 @@ class Args {
     return this
   }
 
-  option (name, description, defaultValue, init) {
+  option(name, description, defaultValue, init) {
     let usage = []
 
     // If name is an array, pick the values
@@ -68,13 +67,13 @@ class Args {
       throw new Error('Short version of option is longer than 1 char')
     }
 
-    let optionDetails = {
+    const optionDetails = {
       defaultValue,
       usage,
       description
     }
 
-    let defaultIsWrong = false
+    let defaultIsWrong
 
     switch (defaultValue) {
       case false:
@@ -86,11 +85,13 @@ class Args {
       case undefined:
         defaultIsWrong = true
         break
+      default:
+        defaultIsWrong = false
     }
 
     // Set initializer depending on type of default value
     if (!defaultIsWrong) {
-      let initFunction = typeof init === 'function'
+      const initFunction = typeof init === 'function'
       optionDetails.init = initFunction ? init : this.handleType(defaultValue)[1]
     }
 
@@ -101,7 +102,7 @@ class Args {
     return this
   }
 
-  command (usage, description, init) {
+  command(usage, description, init) {
     // Register command to global scope
     this.details.commands.push({
       usage,
@@ -113,7 +114,7 @@ class Args {
     return this
   }
 
-  handleType (value) {
+  handleType(value) {
     let type = value
 
     if (typeof value !== 'function') {
@@ -124,28 +125,24 @@ class Args {
     // select a default initializer function
     switch (type) {
       case String:
-      case toString:
         return ['[value]']
-        break
       case Array:
         return ['<list>']
-        break
       case Number:
       case parseInt:
         return ['<n>', parseInt]
-        break
       default:
         return false
     }
   }
 
-  readOption (option) {
-    let value = false,
-        contents = {}
+  readOption(option) {
+    let value = false
+    const contents = {}
 
     // If option has been used, get its value
-    for (let name of option.usage) {
-      let fromArgs = this.raw[name]
+    for (const name of option.usage) {
+      const fromArgs = this.raw[name]
 
       if (fromArgs) {
         value = fromArgs
@@ -154,8 +151,8 @@ class Args {
 
     // Process the option's value
     for (let name of option.usage) {
-      let propVal = value || option.defaultValue,
-          condition = true
+      let propVal = value || option.defaultValue
+      let condition = true
 
       if (option.init) {
         // Only use the toString initializer if value is a number
@@ -173,32 +170,41 @@ class Args {
       name = camelcase(name)
 
       // Add option to list if it has a value
-      if (propVal) contents[name] = propVal
+      if (propVal) {
+        contents[name] = propVal
+      }
     }
 
     return contents
   }
 
-  getOptions () {
-    let options = {},
-        args = {}
+  getOptions() {
+    const options = {}
+    const args = {}
 
     // Copy over the arguments
     Object.assign(args, this.raw)
     delete args._
 
     // Set option defaults
-    for (let option of this.details.options) {
-      if (!option.defaultValue) continue
+    for (const option of this.details.options) {
+      if (!option.defaultValue) {
+        continue
+      }
+
       Object.assign(options, this.readOption(option))
     }
 
     // Override defaults if used in command line
-    for (let option in args) {
-      let related = this.isDefined(option, 'options')
+    for (const option in args) {
+      if (!{}.hasOwnProperty.call(args, option)) {
+        continue
+      }
+
+      const related = this.isDefined(option, 'options')
 
       if (related) {
-        let details = this.readOption(related)
+        const details = this.readOption(related)
         Object.assign(options, details)
       }
     }
@@ -206,17 +212,17 @@ class Args {
     return options
   }
 
-  generateDetails (kind) {
+  generateDetails(kind) {
     // Get all properties of kind from global scope
     const items = this.details[kind]
-    let parts = []
+    const parts = []
 
     // Sort items alphabetically
     items.sort((a, b) => {
-      const isCmd = kind == 'commands'
+      const isCmd = kind === 'commands'
 
-      let first = isCmd ? a.usage : a.usage[1],
-          second = isCmd ? b.usage : b.usage[1]
+      const first = isCmd ? a.usage : a.usage[1]
+      const second = isCmd ? b.usage : b.usage[1]
 
       switch (true) {
         case (first < second): return -1
@@ -225,20 +231,24 @@ class Args {
       }
     })
 
-    for (let item in items) {
-      let usage = items[item].usage,
-          initial = items[item].defaultValue
+    for (const item in items) {
+      if (!{}.hasOwnProperty.call(items, item)) {
+        continue
+      }
+
+      let usage = items[item].usage
+      let initial = items[item].defaultValue
 
       // If usage is an array, show its contents
       if (usage.constructor === Array) {
-        let isVersion = usage.indexOf('v')
+        const isVersion = usage.indexOf('v')
         usage = `-${usage[0]}, --${usage[1]}`
 
         if (!initial) {
           initial = items[item].init
         }
 
-        usage += (initial && isVersion == -1) ? ' ' + this.handleType(initial)[0] : ''
+        usage += (initial && isVersion === -1) ? ' ' + this.handleType(initial)[0] : ''
       }
 
       // Overwrite usage with readable syntax
@@ -251,9 +261,9 @@ class Args {
       return b.usage.length - a.usage.length
     })[0].usage.length
 
-    for (let item of items) {
-      let usage = item.usage,
-          difference = longest - usage.length
+    for (const item of items) {
+      let usage = item.usage
+      const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
       usage += ' '.repeat(difference)
@@ -265,7 +275,7 @@ class Args {
     return parts
   }
 
-  runCommand (details, options) {
+  runCommand(details, options) {
     // If help is disabled, remove initializer
     if (details.usage === 'help' && !this.config.help) {
       details.init = false
@@ -273,7 +283,7 @@ class Args {
 
     // If command has initializer, call it
     if (details.init) {
-      let sub = [].concat(this.sub)
+      const sub = [].concat(this.sub)
       sub.shift()
 
       return details.init.bind(this)(details.usage, sub, options)
@@ -282,8 +292,8 @@ class Args {
     // Generate full name of binary
     const full = this.binary + '-' + details.usage
 
-    let args = process.argv,
-        i = 0
+    const args = process.argv
+    let i = 0
 
     while (i < 3) {
       args.shift()
@@ -301,7 +311,7 @@ class Args {
     })
   }
 
-  checkVersion () {
+  checkVersion() {
     const parent = module.parent
 
     // Load parent module
@@ -322,14 +332,14 @@ class Args {
     }
   }
 
-  isDefined (name, list) {
+  isDefined(name, list) {
     // Get all items of kind
     const children = this.details[list]
 
     // Check if a child matches the requested name
-    for (let child of children) {
-      let usage = child.usage,
-          type = usage.constructor
+    for (const child of children) {
+      const usage = child.usage
+      const type = usage.constructor
 
       if (type === Array && usage.indexOf(name) > -1) {
         return child
@@ -344,7 +354,7 @@ class Args {
     return false
   }
 
-  parse (argv, options) {
+  parse(argv, options) {
     // Override default option values
     Object.assign(this.config, options)
 
@@ -363,12 +373,12 @@ class Args {
       this.checkVersion()
     }
 
-    const subCommand = this.raw._[1],
-          helpTriggered = this.raw.h || this.raw.help
+    const subCommand = this.raw._[1]
+    const helpTriggered = this.raw.h || this.raw.help
 
-    let args = {},
-        defined = this.isDefined(subCommand, 'commands'),
-        optionList = this.getOptions()
+    const args = {}
+    const defined = this.isDefined(subCommand, 'commands')
+    const optionList = this.getOptions()
 
     Object.assign(args, this.raw)
     args._.shift()
@@ -392,18 +402,18 @@ class Args {
     return optionList
   }
 
-  showHelp () {
-    const binary = this.binary.replace('-', ' '),
-          firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
+  showHelp() {
+    const binary = this.binary.replace('-', ' ')
+    const firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
 
-    let parts = []
+    const parts = []
 
-    let groups = {
+    const groups = {
       commands: true,
       options: true
     }
 
-    for (let group in groups) {
+    for (const group in groups) {
       if (this.details[group].length > 0) {
         continue
       }
@@ -411,9 +421,9 @@ class Args {
       groups[group] = false
     }
 
-    const optionHandle = groups.options ? ' [options]' : '',
-          cmdHandle = groups.commands ? ' [command]' : '',
-          value = typeof this.config.value === 'string' ? ' ' + this.config.value : ''
+    const optionHandle = groups.options ? ' [options]' : ''
+    const cmdHandle = groups.commands ? ' [command]' : ''
+    const value = typeof this.config.value === 'string' ? ' ' + this.config.value : ''
 
     parts.push([
       '',
@@ -421,7 +431,7 @@ class Args {
       ''
     ])
 
-    for (let group in groups) {
+    for (const group in groups) {
       if (!groups[group]) {
         continue
       }
@@ -440,7 +450,7 @@ class Args {
     let output = ''
 
     // And finally, merge and output them
-    for (let part of parts) {
+    for (const part of parts) {
       output += part.join('\n  ')
     }
 
@@ -460,4 +470,4 @@ class Args {
   }
 }
 
-export default new Args
+export default new Args()

@@ -3,7 +3,7 @@ import test from 'ava'
 
 // Ours
 import args from '../dist'
-import { version } from '../package.json'
+import {version} from '../package.json'
 
 const argv = [
   'node',
@@ -19,8 +19,12 @@ test('options', t => {
 
   const config = args.parse(argv)
 
-  for (let property in config) {
-    let content = config[property]
+  for (const property in config) {
+    if (!{}.hasOwnProperty.call(config, property)) {
+      continue
+    }
+
+    const content = config[property]
 
     switch (content) {
       case version:
@@ -40,14 +44,14 @@ test('usage information', t => {
     usageFilter: filter
   })
 
-  const runner = args.config.usageFilter,
-        value = 'a test'
+  const runner = args.config.usageFilter
+  const value = 'a test'
 
   t.is(runner(value), value)
 })
 
 test('config', t => {
-  const runner = args.parse(argv, {
+  args.parse(argv, {
     help: false,
     errors: false
   })
