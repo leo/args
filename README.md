@@ -1,4 +1,4 @@
-# args [![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build] [![Beerpay][beer-badge]][beer]
+# args [![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build] [![Beerpay][beer-badge]][beer] [![XO][xo-badge]][xo]
 
 This package makes creating command line interfaces a breeze.
 
@@ -178,7 +178,12 @@ As always, you can run the [AVA](https://github.com/sindresorhus/ava) and [ESLin
 
 [build]: https://travis-ci.org/leo/args
 [build-badge]: https://travis-ci.org/leo/args.svg?branch=master
+
 [chat]: https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 [chat-badge]: https://badges.gitter.im/leo/args.svg
+
 [beer]: https://beerpay.io/leo/args
 [beer-badge]: https://beerpay.io/leo/args/badge.svg?style=flat
+
+[xo]: https://github.com/sindresorhus/xo
+[xo-badge]: https://img.shields.io/badge/code_style-XO-5ed9c7.svg
