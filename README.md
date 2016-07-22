@@ -1,8 +1,4 @@
-<h1 align="center">
-	<br>
-	<img width="700" src="https://cloud.githubusercontent.com/assets/6170607/17053769/d5411156-5003-11e6-8386-8fb397cc8f81.png">
-	<br>
-</h1>
+# args
 
 > This package makes creating command line interfaces a breeze.
 
