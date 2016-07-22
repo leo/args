@@ -1,6 +1,15 @@
-# args [![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build] [![Beerpay][beer-badge]][beer] [![XO][xo-badge]][xo]
+# args
 
-This package makes creating command line interfaces a breeze.
+
+<h1 align="center">
+	<br>
+	<img width="600" src="https://cloud.githubusercontent.com/assets/6170607/17053769/d5411156-5003-11e6-8386-8fb397cc8f81.png">
+	<br>
+</h1>
+
+> This package makes creating command line interfaces a breeze.
+
+[![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build] [![Beerpay][beer-badge]][beer] [![XO][xo-badge]][xo]
 
 While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://npmjs.com/minimist) for all the actual parsing.
 
