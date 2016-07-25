@@ -56,11 +56,7 @@
       "ava/no-ignored-test-files": 0
     }
   },
-  "author": {
-    "name": "Leo Lamprecht",
-    "email": "mindrun@icloud.com",
-    "url": "http://leo.im"
-  },
+  "author": "leo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/leo/args/issues"
