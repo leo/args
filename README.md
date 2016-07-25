@@ -19,7 +19,7 @@ If you'd like to ask the user for input, you can use args in combination with so
 
 ## Usage
 
-Firstly, you need to install the package:
+Firstly, you need to install the package (you'll need at least node v6):
 
 ```bash
 npm install --save args
