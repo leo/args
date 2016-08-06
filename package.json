@@ -60,7 +60,7 @@
   },
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
-    "ava": "^0.15.0",
+    "ava": "^0.16.0",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
     "gulp": "^3.9.1",
