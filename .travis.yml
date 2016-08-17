@@ -8,8 +8,7 @@ git:
   depth: 1
 
 node_js:
-  - 6
-  - 4
+  - 'node'
 
 cache:
   directories:
