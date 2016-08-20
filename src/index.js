@@ -102,7 +102,15 @@ class Args {
     return this
   }
 
-  command(usage, description, init) {
+  command(usage, description, init, aliases) {
+    if (Array.isArray(init)) {
+      aliases = init
+      init = undefined
+    }
+    if (aliases && Array.isArray(aliases)) {
+      usage = [].concat([usage], aliases)
+    }
+
     // Register command to global scope
     this.details.commands.push({
       usage,
@@ -216,11 +224,10 @@ class Args {
     // Get all properties of kind from global scope
     const items = this.details[kind]
     const parts = []
+    const isCmd = kind === 'commands'
 
     // Sort items alphabetically
     items.sort((a, b) => {
-      const isCmd = kind === 'commands'
-
       const first = isCmd ? a.usage : a.usage[1]
       const second = isCmd ? b.usage : b.usage[1]
 
@@ -241,14 +248,18 @@ class Args {
 
       // If usage is an array, show its contents
       if (usage.constructor === Array) {
-        const isVersion = usage.indexOf('v')
-        usage = `-${usage[0]}, --${usage[1]}`
+        if (isCmd) {
+          usage = usage.join(', ')
+        } else {
+          const isVersion = usage.indexOf('v')
+          usage = `-${usage[0]}, --${usage[1]}`
 
-        if (!initial) {
-          initial = items[item].init
+          if (!initial) {
+            initial = items[item].init
+          }
+
+          usage += (initial && isVersion === -1) ? ' ' + this.handleType(initial)[0] : ''
         }
-
-        usage += (initial && isVersion === -1) ? ' ' + this.handleType(initial)[0] : ''
       }
 
       // Overwrite usage with readable syntax
@@ -290,7 +301,7 @@ class Args {
     }
 
     // Generate full name of binary
-    const full = this.binary + '-' + details.usage
+    const full = this.binary + '-' + (Array.isArray(details.usage) ? details.usage[0] : details.usage)
 
     const args = process.argv
     let i = 0
