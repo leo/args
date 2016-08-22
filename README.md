@@ -35,7 +35,7 @@ import args from 'args'
 args
   .option('port', 'The port on which the app will be running', 3000)
   .option('reload', 'Enable/disable livereloading')
-  .command('serve', 'Serve your static site')
+  .command('serve', 'Serve your static site', ['s'])
 
 // No magic globals here
 const flags = args.parse(process.argv)
@@ -60,8 +60,8 @@ In turn, this is how the auto-generated usage information will look like:
 
   Commands:
 
-    serve  Serve your static site
-    help   Display help
+    serve, s  Serve your static site
+    help      Display help
 
   Options:
 
@@ -98,7 +98,7 @@ Takes in an array of objects that are each defining an option that shall be regi
 
 However, the keys `init` and `defaultValue` are not strictly required.
 
-### .command(name, description, init)
+### .command(name, description, init, aliases)
 
 Register a new sub command. Args requires all binaries to be defined in the style of git's. That means each sub command should be a separate binary called "&#60;parent-command&#62;-&#60;sub-command&#62;".
 
@@ -115,6 +115,7 @@ function aCommand (name, sub, options) {
   options // An object containing the options that have been used
 }
 ```
+- **aliases:** If an array was passed through at this parameter, args will use it as an array of aliases for the command.
 
 Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
 
