@@ -108,14 +108,15 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 - **description:** A short explanation of what the command shall be used for. Will be outputted along with help.
 - **init:** If a function was passed through at this parameter, args will call it instead of running the binary related to that command. The function receives three arguments:
 
-```js
-function aCommand (name, sub, options) {
-  name // The name of the command
-  sub // The output of .sub
-  options // An object containing the options that have been used
-}
-```
-- **aliases:** If an array was passed through at this parameter, args will use it as an array of aliases for the command.
+  ```js
+  function aCommand (name, sub, options) {
+    name // The name of the command
+    sub // The output of .sub
+    options // An object containing the options that have been used
+  }
+  ```
+  
+- **aliases:** Takes in an array of aliases which can be used to run the command.
 
 Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
 
