@@ -116,9 +116,9 @@ For example: If your main binary is called "muffin", the binary of the subcomman
   }
   ```
   
+  Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
+  
 - **aliases:** Takes in an array of aliases which can be used to run the command.
-
-Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
 
 ### .parse(argv, options)
 
