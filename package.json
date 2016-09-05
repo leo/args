@@ -13,9 +13,11 @@
     "test": "xo && ava"
   },
   "babel": {
+    "presets": [
+      "es2015"
+    ],
     "plugins": [
-      "add-module-exports",
-      "transform-es2015-modules-commonjs"
+      "add-module-exports"
     ]
   },
   "repository": "leo/args",
@@ -62,7 +64,8 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-plugin-add-module-exports": "^0.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
     "execa": "^0.4.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
