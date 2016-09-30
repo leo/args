@@ -11,8 +11,6 @@ import chalk from 'chalk'
 
 class Args {
   constructor() {
-    this._name = null
-
     // Will later hold registered options and commands
     this.details = {
       options: [],
@@ -24,18 +22,12 @@ class Args {
       help: true,
       version: true,
       usageFilter: null,
-      value: null
+      value: null,
+      name: null
     }
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
     loudRejection()
-  }
-
-  name(val) {
-    if (val != null) {
-      this._name = val
-    }
-    return this._name || this.binary.replace('-', ' ')
   }
 
   options(list) {
@@ -423,6 +415,7 @@ class Args {
   }
 
   showHelp() {
+    const name = this.config.name || this.binary.replace('-', ' ')
     const firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
 
     const parts = []
@@ -446,7 +439,7 @@ class Args {
 
     parts.push([
       '',
-      'Usage: ' + chalk.yellow(this.name()) + chalk.dim(optionHandle + cmdHandle + value),
+      'Usage: ' + chalk.yellow(name) + chalk.dim(optionHandle + cmdHandle + value),
       ''
     ])
 
