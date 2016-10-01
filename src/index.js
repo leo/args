@@ -22,7 +22,8 @@ class Args {
       help: true,
       version: true,
       usageFilter: null,
-      value: null
+      value: null,
+      name: null
     }
 
     // Make unhandled promise rejections fail loudly instead of the default silent fail
@@ -414,7 +415,7 @@ class Args {
   }
 
   showHelp() {
-    const binary = this.binary.replace('-', ' ')
+    const name = this.config.name || this.binary.replace('-', ' ')
     const firstBig = word => word.charAt(0).toUpperCase() + word.substr(1)
 
     const parts = []
@@ -438,7 +439,7 @@ class Args {
 
     parts.push([
       '',
-      'Usage: ' + chalk.yellow(binary) + chalk.dim(optionHandle + cmdHandle + value),
+      'Usage: ' + chalk.yellow(name) + chalk.dim(optionHandle + cmdHandle + value),
       ''
     ])
 
