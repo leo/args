@@ -161,6 +161,7 @@ By default, the module already registers some default options (e.g. "version" an
 | Property | Description | Default&nbsp;value | Type |
 | -------- | ----------- | ------------------ | ---- |
 | help | Automatically render the usage information when running `help`, `-h` or `--help` | true | Boolean |
+| name | The name of your program to display in help | Name of script file | String |
 | version | Outputs the version tag of your package.json | true | Boolean |
 | usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
 | value | Suffix for the "Usage" section of the usage information ([example](https://github.com/leo/args/issues/13)) | null | String |
