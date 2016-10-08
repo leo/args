@@ -22,7 +22,7 @@ If you'd like to ask the user for input, you can use args in combination with so
 Firstly, you need to install the package (you'll need at least node v6):
 
 ```bash
-npm install --save args
+$ npm install --save args
 ```
 
 Once you're done, you can start using it within your binaries:
@@ -37,7 +37,6 @@ args
   .option('reload', 'Enable/disable livereloading')
   .command('serve', 'Serve your static site', ['s'])
 
-// No magic globals here
 const flags = args.parse(process.argv)
 ```
 
@@ -60,8 +59,8 @@ In turn, this is how the auto-generated usage information will look like:
 
   Commands:
 
-    serve, s  Serve your static site
-    help      Display help
+    serve, s       Serve your static site
+    help           Display help
 
   Options:
 
@@ -115,9 +114,9 @@ For example: If your main binary is called "muffin", the binary of the subcomman
     options // An object containing the options that have been used
   }
   ```
-  
+
   Using an initializer is currently only recommended if your command doesn't need special/different options than the binary in which you're defining it. The reason for this is that the "options" argument of the upper function will contain the options registered within the current binary.
-  
+
 - **aliases:** Takes in an array of aliases which can be used to run the command.
 
 ### .parse(argv, options)
