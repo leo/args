@@ -7,7 +7,7 @@ import execa from 'execa'
 
 // Ours
 import args from '../dist'
-import {version} from '../package.json'
+import {version} from '../package'
 
 const argv = [
   'node',

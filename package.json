@@ -48,7 +48,7 @@
     "space": true,
     "semicolon": false,
     "rules": {
-      "xo/no-process-exit": 0,
+      "unicorn/no-process-exit": 0,
       "max-lines": 0,
       "ava/no-ignored-test-files": 0
     }
@@ -67,7 +67,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0",
-    "xo": "^0.16.0"
+    "xo": "^0.17.0"
   },
   "dependencies": {
     "camelcase": "^3.0.0",
