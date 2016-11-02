@@ -141,7 +141,7 @@ class Args {
       case parseInt:
         return ['<n>', parseInt]
       default:
-        return false
+        return ['']
     }
   }
 
@@ -274,14 +274,17 @@ class Args {
     })[0].usage.length
 
     for (const item of items) {
-      let usage = item.usage
+      let { usage, description } = item
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
       usage += ' '.repeat(difference)
 
       // Add some space around it as well
-      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(item.description))
+      if ('undefined' !== typeof item.defaultValue) {
+        description += ` (defaults to ${JSON.stringify(item.defaultValue)})`
+      }
+      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(description))
     }
 
     return parts
