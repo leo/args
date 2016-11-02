@@ -274,14 +274,14 @@ class Args {
     })[0].usage.length
 
     for (const item of items) {
-      let { usage, description } = item
+      let {usage, description} = item
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
       usage += ' '.repeat(difference)
 
       // Add some space around it as well
-      if ('undefined' !== typeof item.defaultValue) {
+      if (typeof item.defaultValue !== 'undefined') {
         description += ` (defaults to ${JSON.stringify(item.defaultValue)})`
       }
       parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(description))
