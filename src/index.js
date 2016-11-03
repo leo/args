@@ -337,7 +337,7 @@ class Args {
 
     if (version) {
       // If it exists, register it as a default option
-      this.option('version', 'Output the version number', version)
+      this.option('version', 'Output the version number')
 
       // And immediately output it if used in command line
       if (this.raw.v || this.raw.version) {
