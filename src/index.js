@@ -141,7 +141,7 @@ class Args {
       case parseInt:
         return ['<n>', parseInt]
       default:
-        return false
+        return ['']
     }
   }
 
@@ -197,7 +197,7 @@ class Args {
 
     // Set option defaults
     for (const option of this.details.options) {
-      if (!option.defaultValue) {
+      if (typeof option.defaultValue === 'undefined') {
         continue
       }
 
@@ -274,14 +274,21 @@ class Args {
     })[0].usage.length
 
     for (const item of items) {
-      let usage = item.usage
+      let {usage, description, defaultValue} = item
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
       usage += ' '.repeat(difference)
 
       // Add some space around it as well
-      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(item.description))
+      if (typeof defaultValue !== 'undefined') {
+        if (typeof defaultValue === 'boolean') {
+          description += ` (${defaultValue ? 'enabled' : 'disabled'} by default)`
+        } else {
+          description += ` (defaults to ${JSON.stringify(defaultValue)})`
+        }
+      }
+      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(description))
     }
 
     return parts
@@ -334,7 +341,7 @@ class Args {
 
     if (version) {
       // If it exists, register it as a default option
-      this.option('version', 'Output the version number', version)
+      this.option('version', 'Output the version number')
 
       // And immediately output it if used in command line
       if (this.raw.v || this.raw.version) {
