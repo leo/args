@@ -89,7 +89,7 @@ test('command aliases', async t => {
   }
 
   result = await run('help')
-  const regexes = [/binary, b/, /cmd/, /-a, --abc \[value\]/]
+  const regexes = [/binary, b/, /cmd/, /-a, --abc \[value]/]
   for (const regex of regexes) {
     t.regex(result, regex)
   }
