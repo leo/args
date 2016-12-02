@@ -384,7 +384,7 @@ class Args {
     }
 
     // Parse arguments using minimist
-    this.raw = parser(argv.slice(1))
+    this.raw = parser(argv.slice(1), this.config.minimist)
     this.binary = path.basename(this.raw._[0])
 
     // If default version is allowed, check for it
