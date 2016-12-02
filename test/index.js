@@ -9,10 +9,13 @@ import execa from 'execa'
 import args from '../dist'
 import {version} from '../package'
 
+const port = 8000
+
 const argv = [
   'node',
   'foo',
   '-p',
+  port.toString(),
   '--data'
 ]
 
@@ -33,6 +36,9 @@ test('options', t => {
     switch (content) {
       case version:
         t.is(content, version)
+        break
+      case 8000:
+        t.is(content, port)
         break
       default:
         t.true(content)
@@ -93,4 +99,13 @@ test('command aliases', async t => {
   for (const regex of regexes) {
     t.regex(result, regex)
   }
+})
+
+test('options propogated to minimist', t => {
+  args
+    .option('port', 'The port on which the site will run')
+
+  const config = args.parse(argv, {minimist: {string: 'p'}})
+
+  t.is(config.port, port.toString())
 })
