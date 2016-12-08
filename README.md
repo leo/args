@@ -1,12 +1,9 @@
 # args
 
-> This package makes creating command line interfaces a breeze.
+[![Build Status](https://travis-ci.org/leo/args.svg?branch=master)](https://travis-ci.org/leo/args)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-[![Gitter][chat-badge]][chat] [![Build Status][build-badge]][build] [![Beerpay][beer-badge]][beer] [![XO][xo-badge]][xo]
-
-While there might be many alternatives out there, all ones I used are still based on old best practises. But since I'm not trying to reinvent the wheel here, I've decided to take advantage of [minimist](https://npmjs.com/minimist) for all the actual parsing.
-
-If you'd like to ask the user for input, you can use args in combination with something like [inquirer](https://npmjs.com/inquirer) or [prompt](https://npmjs.com/prompt).
+This package makes creating command line interfaces a breeze.
 
 ## Features
 
@@ -180,15 +177,3 @@ As always, you can run the [AVA](https://github.com/sindresorhus/ava) and [ESLin
 ## Special thanks
 
 ... to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content (before I've added my stuff) of the package, you can find it [here](https://github.com/dimsmol/args).
-
-[build]: https://travis-ci.org/leo/args
-[build-badge]: https://travis-ci.org/leo/args.svg?branch=master
-
-[chat]: https://gitter.im/leo/args?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[chat-badge]: https://badges.gitter.im/leo/args.svg
-
-[beer]: https://beerpay.io/leo/args
-[beer-badge]: https://beerpay.io/leo/args/badge.svg?style=flat
-
-[xo]: https://github.com/sindresorhus/xo
-[xo-badge]: https://img.shields.io/badge/code_style-XO-5ed9c7.svg
