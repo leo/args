@@ -328,6 +328,25 @@ class Args {
     this.child.on('error', err => {
       throw err
     })
+
+    this.child.on('exit', (code, signal) => {
+      process.on('exit', () => {
+        this.child = null
+        if (signal) {
+          process.kill(process.pid, signal)
+        } else {
+          process.exit(code)
+        }
+      })
+    })
+
+    // proxy SIGINT to child process
+    process.on('SIGINT', () => {
+      if (this.child) {
+        this.child.kill('SIGINT')
+        this.child.kill('SIGTERM') // if that didn't work, we're probably in an infinite loop, so make it die
+      }
+    })
   }
 
   checkVersion() {
