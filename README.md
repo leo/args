@@ -19,7 +19,7 @@ This package makes creating command line interfaces a breeze.
 Firstly, you need to install the package (you'll need at least node v6):
 
 ```bash
-$ npm install --save args
+npm install --save args
 ```
 
 Once you're done, you can start using it within your binaries:
