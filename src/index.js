@@ -152,15 +152,19 @@ class Args {
     // If option has been used, get its value
     for (const name of option.usage) {
       const fromArgs = this.raw[name]
-
-      if (fromArgs) {
+      if (typeof fromArgs !== 'undefined') {
         value = fromArgs
       }
     }
 
     // Process the option's value
     for (let name of option.usage) {
-      let propVal = value || option.defaultValue
+      let propVal = value
+
+      if (typeof option.defaultValue !== 'undefined' && typeof propVal !== typeof option.defaultValue) {
+        propVal = option.defaultValue
+      }
+
       let condition = true
 
       if (option.init) {
@@ -178,10 +182,8 @@ class Args {
       // Camelcase option name
       name = camelcase(name)
 
-      // Add option to list if it has a value
-      if (propVal) {
-        contents[name] = propVal
-      }
+      // Add option to list
+      contents[name] = propVal
     }
 
     return contents
