@@ -2,21 +2,11 @@
   "name": "args",
   "version": "2.2.2",
   "description": "Minimal toolkit for building CLIs",
-  "main": "dist/index.js",
   "files": [
-    "dist"
+    "index.js"
   ],
   "scripts": {
-    "start": "gulp",
-    "prepublish": "gulp transpile",
-    "pretest": "gulp transpile",
     "test": "xo && ava"
-  },
-  "babel": {
-    "plugins": [
-      "add-module-exports",
-      "transform-es2015-modules-commonjs"
-    ]
   },
   "repository": "leo/args",
   "greenkeeper": {
@@ -61,12 +51,7 @@
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
     "ava": "^0.17.0",
-    "babel-plugin-add-module-exports": "^0.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
     "execa": "^0.6.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-cached": "^1.1.0",
     "xo": "^0.17.0"
   },
   "dependencies": {
