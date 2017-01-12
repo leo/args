@@ -510,4 +510,4 @@ class Args {
   }
 }
 
-export default new Args()
+module.exports = exports.default = new Args()
