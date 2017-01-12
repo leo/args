@@ -1,13 +1,13 @@
 // Native
-import path from 'path'
-import {spawn} from 'child_process'
+const path = require('path')
+const {spawn} = require('child_process')
 
 // Packages
-import parser from 'minimist'
-import pkginfo from 'pkginfo'
-import loudRejection from 'loud-rejection'
-import camelcase from 'camelcase'
-import chalk from 'chalk'
+const parser = require('minimist')
+const pkginfo = require('pkginfo')
+const loudRejection = require('loud-rejection')
+const camelcase = require('camelcase')
+const chalk = require('chalk')
 
 class Args {
   constructor() {
