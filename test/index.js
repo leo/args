@@ -6,7 +6,7 @@ import test from 'ava'
 import execa from 'execa'
 
 // Ours
-import args from '../dist'
+import args from '../'
 import {version} from '../package'
 
 const port = 8000

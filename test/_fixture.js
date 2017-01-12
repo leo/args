@@ -1,4 +1,4 @@
-const args = require('../dist')
+const args = require('../')
 
 args.command('install', 'desc here', () => {
   console.log('install')
