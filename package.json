@@ -22,16 +22,7 @@
     "util",
     "bin",
     "commander",
-    "minimist",
-    "binary",
-    "parser",
-    "option",
-    "flags",
-    "cmd",
-    "utility",
-    "helper",
-    "terminal",
-    "console"
+    "minimist"
   ],
   "xo": {
     "esnext": true,
