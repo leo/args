@@ -13,7 +13,7 @@
     "emails": false
   },
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 4.0.0"
   },
   "keywords": [
     "cli",
