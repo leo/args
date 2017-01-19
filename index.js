@@ -1,6 +1,6 @@
 // Native
 const path = require('path')
-const {spawn} = require('child_process')
+const spawn = require('child_process').spawn
 
 // Packages
 const parser = require('minimist')
