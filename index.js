@@ -278,7 +278,9 @@ class Args {
     })[0].usage.length
 
     for (const item of items) {
-      let {usage, description, defaultValue} = item
+      let usage = item.usage
+      let description = item.description
+      let defaultValue = item.defaultValue
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
