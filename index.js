@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 // Native
 const path = require('path')
@@ -280,7 +280,7 @@ class Args {
     for (const item of items) {
       let usage = item.usage
       let description = item.description
-      let defaultValue = item.defaultValue
+      const defaultValue = item.defaultValue
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
