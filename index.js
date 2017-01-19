@@ -1,6 +1,8 @@
+'use strict'
+
 // Native
 const path = require('path')
-const {spawn} = require('child_process')
+const spawn = require('child_process').spawn
 
 // Packages
 const parser = require('minimist')
@@ -276,7 +278,9 @@ class Args {
     })[0].usage.length
 
     for (const item of items) {
-      let {usage, description, defaultValue} = item
+      let usage = item.usage
+      let description = item.description
+      const defaultValue = item.defaultValue
       const difference = longest - usage.length
 
       // Compensate the difference to longest property with spaces
