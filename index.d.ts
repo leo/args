@@ -54,7 +54,7 @@ declare namespace Args {
         option(name: string | [string, string], description: string, defaultValue?: any, init?: IOptionInitFunction): void;
         options(list: IOption[]): void;
         command(name: string, description: string, init?: ICommandInitFunction, aliases?: string[]): void;
-        parse(argv: string[], options: IConfiguration): void;
+        parse(argv: string[], options?: IConfiguration): void;
         showHelp(): void;
     }
 }
