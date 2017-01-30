@@ -2,6 +2,7 @@
   "name": "args",
   "version": "2.2.4",
   "description": "Minimal toolkit for building CLIs",
+  "types": "index.d.ts",
   "files": [
     "index.js"
   ],
