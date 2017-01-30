@@ -9,8 +9,12 @@ declare namespace Args {
     export interface IMinimistArguments {
         string?: string | string[];
         boolean?: boolean | string | string[];
-        alias?: any;
-        default?: any;
+        alias?: {
+            [key: string]: string | string[]
+        };
+        default?: {
+            [key: string]: any
+        };
         stopEarly?: boolean;
         "--"?: boolean;
         unknown?: IMinimistUnknownFunction;
@@ -45,12 +49,12 @@ declare namespace Args {
     }
 
     export interface API {
-        sub: string[],
+        sub: string[];
 
-        option(name: string, description: string, defaultValue?: any, init?: IOptionInitFunction): void,
-        options(list: IOption[]): void,
-        command(name: string, description: string, init?: ICommandInitFunction, aliases?: string[]): void,
-        parse(argv: string[], options: IConfiguration): void,
-        showHelp(): void,
+        option(name: string | [string, string], description: string, defaultValue?: any, init?: IOptionInitFunction): void;
+        options(list: IOption[]): void;
+        command(name: string, description: string, init?: ICommandInitFunction, aliases?: string[]): void;
+        parse(argv: string[], options: IConfiguration): void;
+        showHelp(): void;
     }
 }
