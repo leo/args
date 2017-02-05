@@ -50,13 +50,18 @@ class Args {
   option(name, description, defaultValue, init) {
     let usage = []
 
+    const assignShort = (name, options, short) => {
+      if (options.find(flagName => flagName.usage[0] === short)) {
+        short = name.charAt(0).toUpperCase()
+      }
+      return [short, name]
+    }
+
     // If name is an array, pick the values
     // Otherwise just use the whole thing
     switch (name.constructor) {
       case String:
-        usage[0] = name.charAt(0)
-        usage[1] = name
-
+        usage = assignShort(name, this.details.options, name.charAt(0))
         break
       case Array:
         usage = usage.concat(name)
