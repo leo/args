@@ -16,13 +16,16 @@ const argv = [
   'foo',
   '-p',
   port.toString(),
-  '--data'
+  '--data',
+  '--D',
+  'D'
 ]
 
 test('options', t => {
   args
     .option('port', 'The port on which the site will run')
     .option(['d', 'data'], 'The data that shall be used')
+    .option('duplicated', 'Duplicated first char in option')
 
   const config = args.parse(argv)
 
@@ -34,6 +37,9 @@ test('options', t => {
     const content = config[property]
 
     switch (content) {
+      case 'D':
+        t.is(content, 'D')
+        break
       case version:
         t.is(content, version)
         break
