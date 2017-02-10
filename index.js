@@ -186,8 +186,10 @@ class Args {
         }
       }
 
-      // Camelcase option name
-      name = camelcase(name)
+      // Camelcase option name (skip short flag)
+      if (name.length > 1) {
+        name = camelcase(name)
+      }
 
       // Add option to list
       contents[name] = propVal
