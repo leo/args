@@ -9,9 +9,6 @@
     "test": "xo && ava"
   },
   "repository": "leo/args",
-  "greenkeeper": {
-    "emails": false
-  },
   "engines": {
     "node": ">= 4.0.0"
   },
