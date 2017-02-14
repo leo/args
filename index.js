@@ -7,7 +7,6 @@ const spawn = require('child_process').spawn
 // Packages
 const parser = require('minimist')
 const pkginfo = require('pkginfo')
-const loudRejection = require('loud-rejection')
 const camelcase = require('camelcase')
 const chalk = require('chalk')
 
@@ -27,9 +26,6 @@ class Args {
       value: null,
       name: null
     }
-
-    // Make unhandled promise rejections fail loudly instead of the default silent fail
-    loudRejection()
   }
 
   options(list) {

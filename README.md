@@ -16,7 +16,7 @@ This package makes creating command line interfaces a breeze.
 
 ## Usage
 
-Install the package (you'll need at least v6 of [Node](https://nodejs.org/en/)):
+Install the package (you'll need at least v6.6 of [Node](https://nodejs.org/en/)):
 
 ```bash
 npm install --save args
