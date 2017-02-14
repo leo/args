@@ -1,5 +1,7 @@
 # args
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/leo/args.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/leo/args.svg?branch=master)](https://travis-ci.org/leo/args)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
