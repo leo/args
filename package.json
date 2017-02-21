@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
-    "ava": "0.18.0",
+    "ava": "0.18.2",
     "execa": "0.6.0",
     "xo": "0.17.0"
   },
