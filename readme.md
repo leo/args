@@ -116,6 +116,23 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 
 - **aliases:** Takes in an array of aliases which can be used to run the command.
 
+### .example(usage, description)
+
+Register an example which will be shown when calling `help`
+
+- **usage:** Takes a string which defines your usage example command
+- **description:** A short explanation of what the example shall be used for. Will be outputted along with help.
+
+### .examples(list)
+Takes in an array of objects that are each defining an example that shall be registered. This is basically a minimalistic way to register a huge list of examples at once. Here's what each option object needs to look like:
+
+```js
+{
+  usage: 'args command -d',
+  description: 'Run the args command with the option -d'
+}
+```
+
 ### .parse(argv, options)
 
 This method takes the process' command line arguments (command and options) and uses the internal methods to get their values and assign them to the current instance of args. It needs to be run after all of the `.option` and `.command` calls. If you run it before them, the method calls after it won't take effect.

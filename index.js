@@ -15,7 +15,8 @@ class Args {
     // Will later hold registered options and commands
     this.details = {
       options: [],
-      commands: []
+      commands: [],
+      examples: []
     }
 
     // Configuration defaults
@@ -26,6 +27,29 @@ class Args {
       value: null,
       name: null
     }
+  }
+
+  example(usage, description) {
+    if (typeof usage !== 'string' || typeof description !== 'string') {
+      throw new Error('Usage for adding an Example: args.example("usage", "description")')
+    }
+    this.details.examples.push({usage, description})
+
+    return this
+  }
+
+  examples(list) {
+    if (list.constructor !== Array) {
+      throw new Error('Item passed to .examples is not an array')
+    }
+
+    for (const item of list) {
+      const usage = item.usage || false
+      const description = item.description || false
+      this.example(usage, description)
+    }
+
+    return this
   }
 
   options(list) {
@@ -457,7 +481,8 @@ class Args {
 
     const groups = {
       commands: true,
-      options: true
+      options: true,
+      examples: true
     }
 
     for (const group in groups) {
