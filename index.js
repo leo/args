@@ -262,7 +262,7 @@ class Args {
       }
       const usage = chalk.yellow('$ ' + examples[item].usage)
       const description = chalk.dim('- ' + examples[item].description)
-      parts.push(`${description}\n\n  ${usage}\n\n`)
+      parts.push(`  ${description}\n\n    ${usage}\n\n`)
     }
 
     return parts
