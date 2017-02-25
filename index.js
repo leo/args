@@ -252,6 +252,22 @@ class Args {
     return options
   }
 
+  generateExamples() {
+    const examples = this.details.examples
+    const parts = []
+
+    for (const item in examples) {
+      if (!{}.hasOwnProperty.call(examples, item)) {
+        continue
+      }
+      const usage = chalk.yellow('$ ' + examples[item].usage)
+      const description = chalk.dim('- ' + examples[item].description)
+      parts.push(`${description}\n\n  ${usage}\n\n`)
+    }
+
+    return parts
+  }
+
   generateDetails(kind) {
     // Get all properties of kind from global scope
     const items = this.details[kind]
@@ -515,7 +531,12 @@ class Args {
         ''
       ])
 
-      parts.push(this.generateDetails(group))
+      if (group === 'examples') {
+        parts.push(this.generateExamples())
+      } else {
+        parts.push(this.generateDetails(group))
+      }
+
       parts.push(['', ''])
     }
 
