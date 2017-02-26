@@ -25,7 +25,7 @@ class Args {
       usageFilter: null,
       value: null,
       name: null,
-      maincolor: 'yellow',
+      mainColor: 'yellow',
       subColor: 'dim'
     }
 
