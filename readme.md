@@ -162,8 +162,8 @@ By default, the module already registers some default options (e.g. "version" an
 | usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
 | value | Suffix for the "Usage" section of the usage information ([example](https://github.com/leo/args/issues/13)) | null | String |
 | minimist | Additional parsing options to pass to minimist, see [minimist docs](https://github.com/substack/minimist) for details | undefined | Object |
-| mainColor | Specify the main color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers | yellow | String[Array] |
-| subColor | Specify the sub color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers | dim | String[Array] |
+| mainColor | Specify the main color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers. You can specify multiple colors / modifiers with an array. For example: `{mainColor: ['red', 'bold', 'underline']}` | yellow | String[Array] |
+| subColor | Specify the sub color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers. You can specify multiple colors / modifiers with an array. For example: `{subColor: ['dim', 'blue']}` | dim | String[Array] |
 
 You can pass the configuration object as the second paramater of [.parse()](#parseargv-options).
 
