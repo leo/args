@@ -24,8 +24,13 @@ class Args {
       version: true,
       usageFilter: null,
       value: null,
-      name: null
+      name: null,
+      maincolor: 'yellow',
+      subColor: 'dim'
     }
+
+    this.printMainColor = chalk
+    this.printSubColor = chalk
   }
 
   options(list) {
@@ -297,7 +302,7 @@ class Args {
           description += ` (defaults to ${JSON.stringify(defaultValue)})`
         }
       }
-      parts.push('  ' + chalk.yellow(usage) + '  ' + chalk.dim(description))
+      parts.push('  ' + this.printMainColor(usage) + '  ' + this.printSubColor(description))
     }
 
     return parts
@@ -405,6 +410,30 @@ class Args {
     // Override default option values
     Object.assign(this.config, options)
 
+    if (Array.isArray(this.config.mainColor)) {
+      for (const item in this.config.mainColor) {
+        if (!{}.hasOwnProperty.call(this.config.mainColor, item)) {
+          continue
+        }
+        // chain all colors to our print method
+        this.printMainColor = this.printMainColor[this.config.mainColor[item]]
+      }
+    } else {
+      this.printMainColor = this.printMainColor[this.config.mainColor]
+    }
+
+    if (Array.isArray(this.config.subColor)) {
+      for (const item in this.config.subColor) {
+        if (!{}.hasOwnProperty.call(this.config.subColor, item)) {
+          continue
+        }
+        // chain all colors to our print method
+        this.printSubColor = this.printSubColor[this.config.subColor[item]]
+      }
+    } else {
+      this.printSubColor = this.printSubColor[this.config.subColor]
+    }
+
     if (this.config.help) {
       // Register default options and commands
       this.option('help', 'Output usage information')
@@ -474,7 +503,7 @@ class Args {
 
     parts.push([
       '',
-      'Usage: ' + chalk.yellow(name) + chalk.dim(optionHandle + cmdHandle + value),
+      'Usage: ' + this.printMainColor(name) + this.printSubColor(optionHandle + cmdHandle + value),
       ''
     ])
 
