@@ -497,13 +497,13 @@ class Args {
       groups[group] = false
     }
 
-    const optionHandle = groups.options ? ' [options]' : ''
-    const cmdHandle = groups.commands ? ' [command]' : ''
+    const optionHandle = groups.options ? '[options] ' : ''
+    const cmdHandle = groups.commands ? '[command]' : ''
     const value = typeof this.config.value === 'string' ? ' ' + this.config.value : ''
 
     parts.push([
       '',
-      'Usage: ' + this.printMainColor(name) + this.printSubColor(optionHandle + cmdHandle + value),
+      `Usage: ${this.printMainColor(name)} ${this.printSubColor(optionHandle + cmdHandle + value)}`,
       ''
     ])
 
