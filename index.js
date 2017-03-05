@@ -265,8 +265,8 @@ class Args {
       if (!{}.hasOwnProperty.call(examples, item)) {
         continue
       }
-      const usage = chalk.yellow('$ ' + examples[item].usage)
-      const description = chalk.dim('- ' + examples[item].description)
+      const usage = this.printSubColor('$ ' + examples[item].usage)
+      const description = this.printMainColor('- ' + examples[item].description)
       parts.push(`  ${description}\n\n    ${usage}\n\n`)
     }
 
