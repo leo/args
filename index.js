@@ -451,7 +451,7 @@ class Args {
     }
 
     const subCommand = this.raw._[1]
-    const helpTriggered = this.raw.h || this.raw.help
+    const helpTriggered = !!this.raw.help
 
     const args = {}
     const defined = this.isDefined(subCommand, 'commands')
