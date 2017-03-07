@@ -53,7 +53,8 @@ class Args {
 
     const assignShort = (name, options, short) => {
       if (options.find(flagName => flagName.usage[0] === short)) {
-        short = name.charAt(0).toUpperCase()
+        if (name === 'help') short = false
+        else short = name.charAt(0).toUpperCase()
       }
       return [short, name]
     }
@@ -265,7 +266,7 @@ class Args {
           usage = usage.join(', ')
         } else {
           const isVersion = usage.indexOf('v')
-          usage = `-${usage[0]}, --${usage[1]}`
+          usage = usage[0] ? `-${usage[0]}, --${usage[1]}` : `--${usage[1]}`
 
           if (!initial) {
             initial = items[item].init
