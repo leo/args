@@ -53,8 +53,11 @@ class Args {
 
     const assignShort = (name, options, short) => {
       if (options.find(flagName => flagName.usage[0] === short)) {
-        if (name === 'help') short = false
-        else short = name.charAt(0).toUpperCase()
+        if (name === 'help') {
+          short = false
+        } else {
+          short = name.charAt(0).toUpperCase()
+        }
       }
       return [short, name]
     }
@@ -451,7 +454,7 @@ class Args {
     }
 
     const subCommand = this.raw._[1]
-    const helpTriggered = !!this.raw.help
+    const helpTriggered = this.raw.help
 
     const args = {}
     const defined = this.isDefined(subCommand, 'commands')
