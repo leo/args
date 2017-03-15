@@ -15,7 +15,8 @@ class Args {
     // Will later hold registered options and commands
     this.details = {
       options: [],
-      commands: []
+      commands: [],
+      examples: []
     }
 
     // Configuration defaults
@@ -31,6 +32,29 @@ class Args {
 
     this.printMainColor = chalk
     this.printSubColor = chalk
+  }
+
+  example(usage, description) {
+    if (typeof usage !== 'string' || typeof description !== 'string') {
+      throw new Error('Usage for adding an Example: args.example("usage", "description")')
+    }
+    this.details.examples.push({usage, description})
+
+    return this
+  }
+
+  examples(list) {
+    if (list.constructor !== Array) {
+      throw new Error('Item passed to .examples is not an array')
+    }
+
+    for (const item of list) {
+      const usage = item.usage || false
+      const description = item.description || false
+      this.example(usage, description)
+    }
+
+    return this
   }
 
   options(list) {
@@ -231,6 +255,22 @@ class Args {
     }
 
     return options
+  }
+
+  generateExamples() {
+    const examples = this.details.examples
+    const parts = []
+
+    for (const item in examples) {
+      if (!{}.hasOwnProperty.call(examples, item)) {
+        continue
+      }
+      const usage = this.printSubColor('$ ' + examples[item].usage)
+      const description = this.printMainColor('- ' + examples[item].description)
+      parts.push(`  ${description}\n\n    ${usage}\n\n`)
+    }
+
+    return parts
   }
 
   generateDetails(kind) {
@@ -486,7 +526,8 @@ class Args {
 
     const groups = {
       commands: true,
-      options: true
+      options: true,
+      examples: true
     }
 
     for (const group in groups) {
@@ -519,7 +560,12 @@ class Args {
         ''
       ])
 
-      parts.push(this.generateDetails(group))
+      if (group === 'examples') {
+        parts.push(this.generateExamples())
+      } else {
+        parts.push(this.generateDetails(group))
+      }
+
       parts.push(['', ''])
     }
 
