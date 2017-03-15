@@ -23,6 +23,7 @@ class Args {
     this.config = {
       help: true,
       version: true,
+      author: true,
       usageFilter: null,
       value: null,
       name: null,
@@ -503,6 +504,10 @@ class Args {
       this.command('help', 'Display help', this.showHelp);
     }
 
+    if (this.config.author) {
+      this.command('author', 'Display author info', this.showAuthors)
+    }
+
     // Parse arguments using minimist
     this.raw = parser(argv.slice(1), this.config.minimist);
     this.binary = path.basename(this.raw._[0]);
@@ -611,6 +616,46 @@ class Args {
 
     // eslint-disable-next-line unicorn/no-process-exit
     process.exit();
+  }
+
+  showAuthors() {
+    const parent = module.parent
+
+    // get author(s) from parent module
+    const {authors, author, collaborators} = parent.exports
+
+    const sublist = (title, list) =>
+      Array.isArray(list) ?
+        [
+          chalk.underline(title),
+          ...list.map(a =>
+            `${chalk.dim('-')} ${chalk.yellow(a)}`)
+        ] :
+        [
+          `${title}: ${chalk.yellow(list)}`
+        ]
+
+    const getOutput = () => {
+      if (authors) {
+        return sublist('Authors', authors)
+      }
+      if (author) {
+        return sublist('Author', author)
+      }
+      return ['No author found.']
+    }
+
+    const output = getOutput()
+    if (collaborators) {
+      output.push('', ...sublist('Collaborators', collaborators))
+    }
+
+    console.log([
+      '',
+      ...output,
+      ''
+    ].join('\n  '))
+    process.exit()
   }
 }
 
