@@ -363,7 +363,7 @@ class Args {
     }
 
     // Generate full name of binary
-    const full = this.binary + '-' + (Array.isArray(details.usage) ? details.usage[0] : details.usage)
+    const full = path.join(__dirname, this.binary + '-' + (Array.isArray(details.usage) ? details.usage[0] : details.usage))
 
     const args = process.argv
     let i = 0
