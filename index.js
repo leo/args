@@ -625,15 +625,13 @@ class Args {
     const {authors, author, collaborators} = parent.exports
 
     const sublist = (title, list) =>
-      Array.isArray(list) ?
-        [
-          chalk.underline(title),
-          ...list.map(a =>
-            `${chalk.dim('-')} ${chalk.yellow(a)}`)
-        ] :
-        [
-          `${title}: ${chalk.yellow(list)}`
-        ]
+      Array.isArray(list) ? [
+        chalk.underline(title),
+        ...list.map(a =>
+          `${chalk.dim('-')} ${chalk.yellow(a)}`)
+      ] : [
+        `${title}: ${chalk.yellow(list)}`
+      ]
 
     const getOutput = () => {
       if (authors) {
