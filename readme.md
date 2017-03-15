@@ -63,7 +63,7 @@ In turn, this is how the auto-generated usage information will look like:
 
     -v, --version  Output the version number
     -r, --reload   Enable/disable livereloading
-    -h, --help     Output usage information
+    --help         Output usage information
     -p, --port     The port on which the app will be running
 
 ```
@@ -173,7 +173,7 @@ By default, the module already registers some default options (e.g. "version" an
 
 | Property | Description | Default&nbsp;value | Type |
 | -------- | ----------- | ------------------ | ---- |
-| help | Automatically render the usage information when running `help`, `-h` or `--help` | true | Boolean |
+| help | Automatically render the usage information when running `help` or `--help` | true | Boolean |
 | name | The name of your program to display in help | Name of script file | String |
 | version | Outputs the version tag of your package.json | true | Boolean |
 | usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
