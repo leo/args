@@ -42,6 +42,8 @@
     "ava": "0.18.2",
     "eslint-config-prettier": "1.5.0",
     "execa": "0.6.0",
+    "husky": "0.13.3",
+    "lint-staged": "3.4.0",
     "prettier": "0.22.0",
     "xo": "0.17.0"
   },
