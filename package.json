@@ -6,6 +6,7 @@
     "index.js"
   ],
   "scripts": {
+    "precommit": "lint-staged",
     "test": "npm run lint && ava",
     "lint": "xo"
   },
