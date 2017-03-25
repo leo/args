@@ -1,17 +1,27 @@
-const args = require('../')
+const args = require('../');
 
-args.command('install', 'desc here', () => {
-  console.log('install')
-}, ['i'])
+args.command(
+  'install',
+  'desc here',
+  () => {
+    console.log('install');
+  },
+  ['i']
+);
 
-args.command('uninstall', 'another desc here', () => {
-  console.log('uninstall')
-}, ['u', 'rm', 'remove'])
+args.command(
+  'uninstall',
+  'another desc here',
+  () => {
+    console.log('uninstall');
+  },
+  ['u', 'rm', 'remove']
+);
 
 args.command('cmd', 'cmd desc', () => {
-  console.log('^~^')
-})
+  console.log('^~^');
+});
 
-args.command('binary', 'some desc', ['b'])
-args.option(['a', 'abc'], 'something', 'def value')
-args.parse(process.argv)
+args.command('binary', 'some desc', ['b']);
+args.option(['a', 'abc'], 'something', 'def value');
+args.parse(process.argv);
