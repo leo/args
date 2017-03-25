@@ -505,7 +505,7 @@ class Args {
     }
 
     if (this.config.author) {
-      this.command('author', 'Display author info', this.showAuthors)
+      this.command('author', 'Display author info', this.showAuthors);
     }
 
     // Parse arguments using minimist
@@ -619,41 +619,37 @@ class Args {
   }
 
   showAuthors() {
-    const parent = module.parent
+    const parent = module.parent;
 
     // get author(s) from parent module
-    const {authors, author, collaborators} = parent.exports
+    const { authors, author, collaborators } = parent.exports;
 
     const sublist = (title, list) =>
-      Array.isArray(list) ? [
-        chalk.underline(title),
-        ...list.map(a =>
-          `${chalk.dim('-')} ${chalk.yellow(a)}`)
-      ] : [
-        `${title}: ${chalk.yellow(list)}`
-      ]
+      Array.isArray(list)
+        ? [
+            chalk.underline(title),
+            ...list.map(a => `${chalk.dim('-')} ${chalk.yellow(a)}`)
+          ]
+        : [`${title}: ${chalk.yellow(list)}`];
 
     const getOutput = () => {
       if (authors) {
-        return sublist('Authors', authors)
+        return sublist('Authors', authors);
       }
       if (author) {
-        return sublist('Author', author)
+        return sublist('Author', author);
       }
-      return ['No author found.']
-    }
+      return ['No author found.'];
+    };
 
-    const output = getOutput()
+    const output = getOutput();
     if (collaborators) {
-      output.push('', ...sublist('Collaborators', collaborators))
+      output.push('', ...sublist('Collaborators', collaborators));
     }
 
-    console.log([
-      '',
-      ...output,
-      ''
-    ].join('\n  '))
-    process.exit()
+    console.log(['', ...output, ''].join('\n  '));
+    // eslint-disable-next-line unicorn/no-process-exit
+    process.exit();
   }
 }
 
