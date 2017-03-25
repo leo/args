@@ -628,9 +628,11 @@ class Args {
       Array.isArray(list)
         ? [
             chalk.underline(title),
-            ...list.map(a => `${chalk.dim('-')} ${chalk.yellow(a)}`)
+            ...list.map(
+              a => `${this.printSubColor('-')} ${this.printMainColor(a)}`
+            )
           ]
-        : [`${title}: ${chalk.yellow(list)}`];
+        : [`${title}: ${this.printMainColor(list)}`];
 
     const getOutput = () => {
       if (authors) {
