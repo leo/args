@@ -6,7 +6,8 @@
     "index.js"
   ],
   "scripts": {
-    "test": "xo && ava"
+    "test": "npm run lint && ava",
+    "lint": "xo"
   },
   "repository": "leo/args",
   "engines": {
@@ -22,15 +23,14 @@
     "minimist"
   ],
   "xo": {
-    "esnext": true,
-    "space": true,
-    "semicolon": false,
-    "rules": {
-      "unicorn/no-process-exit": 0,
-      "max-lines": 0,
-      "ava/no-ignored-test-files": 0,
-      "import/no-unresolved": 0
-    }
+    "extends": "prettier"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run test",
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "author": "leo",
   "license": "MIT",
@@ -40,7 +40,9 @@
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
     "ava": "0.18.2",
+    "eslint-config-prettier": "1.5.0",
     "execa": "0.6.0",
+    "prettier": "0.22.0",
     "xo": "0.17.0"
   },
   "dependencies": {
