@@ -1,117 +1,108 @@
 // Native
-import path from 'path'
+import path from 'path';
 
 // Packages
-import test from 'ava'
-import execa from 'execa'
+import test from 'ava';
+import execa from 'execa';
 
 // Ours
-import args from '../'
-import {version} from '../package'
+import args from '../';
+import { version } from '../package';
 
-const port = 8000
+const port = 8000;
 
-const argv = [
-  'node',
-  'foo',
-  '-p',
-  port.toString(),
-  '--data',
-  '--D',
-  'D'
-]
+const argv = ['node', 'foo', '-p', port.toString(), '--data', '--D', 'D'];
 
 test('options', t => {
   args
     .option('port', 'The port on which the site will run')
     .option(['d', 'data'], 'The data that shall be used')
-    .option('duplicated', 'Duplicated first char in option')
+    .option('duplicated', 'Duplicated first char in option');
 
-  const config = args.parse(argv)
+  const config = args.parse(argv);
 
   for (const property in config) {
     if (!{}.hasOwnProperty.call(config, property)) {
-      continue
+      continue;
     }
 
-    const content = config[property]
+    const content = config[property];
 
     switch (content) {
       case 'D':
-        t.is(content, 'D')
-        break
+        t.is(content, 'D');
+        break;
       case version:
-        t.is(content, version)
-        break
+        t.is(content, version);
+        break;
       case 8000:
-        t.is(content, port)
-        break
+        t.is(content, port);
+        break;
       default:
-        t.true(content)
+        t.true(content);
     }
   }
-})
+});
 
 test('usage information', t => {
-  const filter = data => data
+  const filter = data => data;
 
   args.parse(argv, {
     value: '<directories>',
     usageFilter: filter
-  })
+  });
 
-  const runner = args.config.usageFilter
-  const value = 'a test'
+  const runner = args.config.usageFilter;
+  const value = 'a test';
 
-  t.is(runner(value), value)
-})
+  t.is(runner(value), value);
+});
 
 test('config', t => {
   args.parse(argv, {
     help: false,
     errors: false
-  })
+  });
 
-  t.true(args.config.version)
-  t.false(args.config.help)
-  t.false(args.config.errors)
-})
+  t.true(args.config.version);
+  t.false(args.config.help);
+  t.false(args.config.errors);
+});
 
 function run(command) {
-  return execa.stdout('node', [path.join(__dirname, '_fixture'), command])
+  return execa.stdout('node', [path.join(__dirname, '_fixture'), command]);
 }
 
 test('command aliases', async t => {
-  let result = await run('install')
-  t.is(result, 'install')
+  let result = await run('install');
+  t.is(result, 'install');
 
-  result = await run('i')
-  t.is(result, 'install')
+  result = await run('i');
+  t.is(result, 'install');
 
-  result = await run('rm')
-  t.is(result, 'uninstall')
+  result = await run('rm');
+  t.is(result, 'uninstall');
 
-  result = await run('cmd')
-  t.is(result, '^~^')
+  result = await run('cmd');
+  t.is(result, '^~^');
 
   try {
-    await run('b')
+    await run('b');
   } catch (err) {
-    t.regex(err.message, /_fixture-binary/gm)
+    t.regex(err.message, /_fixture-binary/gm);
   }
 
-  result = await run('help')
-  const regexes = [/binary, b/, /cmd/, /-a, --abc \[value]/]
+  result = await run('help');
+  const regexes = [/binary, b/, /cmd/, /-a, --abc \[value]/];
   for (const regex of regexes) {
-    t.regex(result, regex)
+    t.regex(result, regex);
   }
-})
+});
 
 test('options propogated to minimist', t => {
-  args
-    .option('port', 'The port on which the site will run')
+  args.option('port', 'The port on which the site will run');
 
-  const config = args.parse(argv, {minimist: {string: 'p'}})
+  const config = args.parse(argv, { minimist: { string: 'p' } });
 
-  t.is(config.port, port.toString())
-})
+  t.is(config.port, port.toString());
+});
