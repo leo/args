@@ -196,6 +196,7 @@ As always, you can run the [AVA](https://github.com/sindresorhus/ava) and [ESLin
 
 ... to [Dmitry Smolin](https://github.com/dimsmol) who donated the package name. If you're looking for the old content (before I've added my stuff) of the package, you can find it [here](https://github.com/dimsmol/args).
 
-## Author
+## Authors
 
-Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo))
+- Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo))
+- Marvin Mieth ([@ntwcklng](https://twitter.com/ntwcklng))
