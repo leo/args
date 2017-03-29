@@ -183,7 +183,7 @@ class Args {
   }
 
   readOption(option) {
-    let value = false;
+    let value = option.defaultValue;
     const contents = {};
 
     // If option has been used, get its value
