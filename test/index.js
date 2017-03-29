@@ -16,6 +16,7 @@ const argv = ['node', 'foo', '-p', port.toString(), '--data', '--D', 'D'];
 test('options', t => {
   args
     .option('port', 'The port on which the site will run')
+    .option('true', 'Boolean', true)
     .option(['d', 'data'], 'The data that shall be used')
     .option('duplicated', 'Duplicated first char in option');
 
