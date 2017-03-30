@@ -65,7 +65,7 @@ class Args {
     }
 
     for (const item of list) {
-      const preset = item.defaultValue || false;
+      const preset = item.defaultValue || undefined;
       const init = item.init || false;
 
       this.option(item.name, item.description, preset, init);
@@ -196,7 +196,6 @@ class Args {
     // Process the option's value
     for (let name of option.usage) {
       let propVal = value;
-
       if (
         typeof option.defaultValue !== 'undefined' &&
         typeof propVal !== typeof option.defaultValue
