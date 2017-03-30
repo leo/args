@@ -7,7 +7,7 @@ import execa from 'execa';
 
 // Ours
 import args from '../';
-import { version } from '../package';
+import { version, author } from '../package';
 
 const port = 8000;
 
@@ -36,6 +36,9 @@ test('options', t => {
       case version:
         t.is(content, version);
         break;
+      case author:
+        t.is(content, author);
+        break;
       case 8000:
         t.is(content, port);
         break;
@@ -62,10 +65,12 @@ test('usage information', t => {
 test('config', t => {
   args.parse(argv, {
     help: false,
-    errors: false
+    errors: false,
+    author: false
   });
 
   t.true(args.config.version);
+  t.false(args.config.author);
   t.false(args.config.help);
   t.false(args.config.errors);
 });
