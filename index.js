@@ -196,6 +196,7 @@ class Args {
     // Process the option's value
     for (let name of option.usage) {
       let propVal = value;
+
       if (
         typeof option.defaultValue !== 'undefined' &&
         typeof propVal !== typeof option.defaultValue
