@@ -98,6 +98,9 @@ test('command aliases', async t => {
     t.regex(err.message, /_fixture-binary/gm);
   }
 
+  result = await run('author');
+  t.regex(result, new RegExp(author));
+
   result = await run('help');
   const regexes = [/binary, b/, /cmd/, /-a, --abc \[value]/];
   for (const regex of regexes) {
