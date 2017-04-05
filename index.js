@@ -9,6 +9,7 @@ const parser = require('minimist');
 const pkginfo = require('pkginfo');
 const camelcase = require('camelcase');
 const chalk = require('chalk');
+const didYouMean = require('didyoumean2');
 
 class Args {
   constructor() {
@@ -518,6 +519,7 @@ class Args {
     const args = {};
     const defined = this.isDefined(subCommand, 'commands');
     const optionList = this.getOptions();
+    const unknownSubcommand = !defined && subCommand;
 
     Object.assign(args, this.raw);
     args._.shift();
@@ -531,9 +533,19 @@ class Args {
       return {};
     }
 
-    // Show usage information if "help" or "h" option was used
+    if (unknownSubcommand) {
+      const availableSubcommands = this.details.commands.map(sub => sub.usage);
+      const suggestSubcommand = didYouMean(subCommand, availableSubcommands);
+      console.log(`\nUnknown Subcommand ${this.printMainColor(subCommand)}`);
+
+      if (suggestSubcommand !== null) {
+        console.log(`Did you mean ${this.printMainColor(suggestSubcommand)}?`);
+      }
+    }
+
+    // Show usage information if "help" or "h" ogit dtdtusption was used
     // And respect the option related to it
-    if (this.config.help && helpTriggered) {
+    if ((this.config.help && helpTriggered) || unknownSubcommand) {
       this.showHelp();
     }
 
