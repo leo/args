@@ -9,7 +9,7 @@ const parser = require('minimist');
 const pkginfo = require('pkginfo');
 const camelcase = require('camelcase');
 const chalk = require('chalk');
-const didYouMean = require('didyoumean2');
+const stringSimilarity = require('string-similarity');
 
 class Args {
   constructor() {
@@ -535,15 +535,21 @@ class Args {
 
     if (unknownSubcommand) {
       const availableSubcommands = this.details.commands.map(sub => sub.usage);
-      const suggestSubcommand = didYouMean(subCommand, availableSubcommands);
+      const suggestSubcommand = stringSimilarity.findBestMatch(
+        subCommand,
+        availableSubcommands
+      );
       console.log(`\nUnknown Subcommand ${this.printMainColor(subCommand)}`);
 
-      if (suggestSubcommand !== null) {
-        console.log(`Did you mean ${this.printMainColor(suggestSubcommand)}?`);
+      if (suggestSubcommand.bestMatch.rating >= 0.5) {
+        // 0.5 rating will catch small typos, e.g. import => omport
+        console.log(
+          `Did you mean ${this.printMainColor(suggestSubcommand.bestMatch.target)}?`
+        );
       }
     }
 
-    // Show usage information if "help" or "h" ogit dtdtusption was used
+    // Show usage information if "help" or "h" option was used
     // And respect the option related to it
     if ((this.config.help && helpTriggered) || unknownSubcommand) {
       this.showHelp();
