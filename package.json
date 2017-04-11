@@ -1,6 +1,6 @@
 {
   "name": "args",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Minimal toolkit for building CLIs",
   "files": [
     "index.js"
