@@ -9,6 +9,7 @@ const parser = require('minimist');
 const pkginfo = require('pkginfo');
 const camelcase = require('camelcase');
 const chalk = require('chalk');
+const stringSimilarity = require('string-similarity');
 
 class Args {
   constructor() {
@@ -37,7 +38,7 @@ class Args {
 
   example(usage, description) {
     if (typeof usage !== 'string' || typeof description !== 'string') {
-      throw new Error(
+      throw new TypeError(
         'Usage for adding an Example: args.example("usage", "description")'
       );
     }
@@ -416,11 +417,11 @@ class Args {
       });
     });
 
-    // proxy SIGINT to child process
+    // Proxy SIGINT to child process
     process.on('SIGINT', () => {
       if (this.child) {
         this.child.kill('SIGINT');
-        this.child.kill('SIGTERM'); // if that didn't work, we're probably in an infinite loop, so make it die
+        this.child.kill('SIGTERM'); // If that didn't work, we're probably in an infinite loop, so make it die
       }
     });
   }
@@ -479,7 +480,8 @@ class Args {
         if (!{}.hasOwnProperty.call(this.config.mainColor, item)) {
           continue;
         }
-        // chain all colors to our print method
+
+        // Chain all colors to our print method
         this.printMainColor = this.printMainColor[this.config.mainColor[item]];
       }
     } else {
@@ -491,7 +493,8 @@ class Args {
         if (!{}.hasOwnProperty.call(this.config.subColor, item)) {
           continue;
         }
-        // chain all colors to our print method
+
+        // Chain all colors to our print method
         this.printSubColor = this.printSubColor[this.config.subColor[item]];
       }
     } else {
@@ -523,6 +526,7 @@ class Args {
     const args = {};
     const defined = this.isDefined(subCommand, 'commands');
     const optionList = this.getOptions();
+    const unknownSubcommand = !defined && subCommand;
 
     Object.assign(args, this.raw);
     args._.shift();
@@ -536,9 +540,25 @@ class Args {
       return {};
     }
 
+    if (unknownSubcommand) {
+      const availableSubcommands = this.details.commands.map(sub => sub.usage);
+      const suggestSubcommand = stringSimilarity.findBestMatch(
+        subCommand,
+        availableSubcommands
+      );
+      console.log(`\nUnknown Subcommand ${this.printMainColor(subCommand)}`);
+
+      if (suggestSubcommand.bestMatch.rating >= 0.5) {
+        // 0.5 rating will catch small typos, e.g. import => omport
+        console.log(
+          `Did you mean ${this.printMainColor(suggestSubcommand.bestMatch.target)}?`
+        );
+      }
+    }
+
     // Show usage information if "help" or "h" option was used
     // And respect the option related to it
-    if (this.config.help && helpTriggered) {
+    if ((this.config.help && helpTriggered) || unknownSubcommand) {
       this.showHelp();
     }
 
@@ -655,4 +675,7 @@ class Args {
   }
 }
 
-module.exports = (exports.default = new Args());
+const instance = new Args();
+
+module.exports = instance;
+exports.default = instance;
