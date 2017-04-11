@@ -37,7 +37,7 @@ class Args {
 
   example(usage, description) {
     if (typeof usage !== 'string' || typeof description !== 'string') {
-      throw new Error(
+      throw new TypeError(
         'Usage for adding an Example: args.example("usage", "description")'
       );
     }
@@ -416,11 +416,11 @@ class Args {
       });
     });
 
-    // proxy SIGINT to child process
+    // Proxy SIGINT to child process
     process.on('SIGINT', () => {
       if (this.child) {
         this.child.kill('SIGINT');
-        this.child.kill('SIGTERM'); // if that didn't work, we're probably in an infinite loop, so make it die
+        this.child.kill('SIGTERM'); // If that didn't work, we're probably in an infinite loop, so make it die
       }
     });
   }
@@ -479,7 +479,8 @@ class Args {
         if (!{}.hasOwnProperty.call(this.config.mainColor, item)) {
           continue;
         }
-        // chain all colors to our print method
+
+        // Chain all colors to our print method
         this.printMainColor = this.printMainColor[this.config.mainColor[item]];
       }
     } else {
@@ -491,7 +492,8 @@ class Args {
         if (!{}.hasOwnProperty.call(this.config.subColor, item)) {
           continue;
         }
-        // chain all colors to our print method
+
+        // Chain all colors to our print method
         this.printSubColor = this.printSubColor[this.config.subColor[item]];
       }
     } else {
@@ -632,4 +634,7 @@ class Args {
   }
 }
 
-module.exports = (exports.default = new Args());
+const instance = new Args();
+
+module.exports = instance;
+exports.default = instance;
