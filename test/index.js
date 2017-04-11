@@ -11,14 +11,25 @@ import { version, author } from '../package';
 
 const port = 8000;
 
-const argv = ['node', 'foo', '-p', port.toString(), '--data', '--D', 'D'];
+const argv = [
+  'node',
+  'foo',
+  '-p',
+  port.toString(),
+  '--data',
+  '--D',
+  'D',
+  '-a',
+  'anotheroptionvalue'
+];
 
 test('options', t => {
   args
     .option('port', 'The port on which the site will run')
     .option('true', 'Boolean', true)
     .option(['d', 'data'], 'The data that shall be used')
-    .option('duplicated', 'Duplicated first char in option');
+    .option('duplicated', 'Duplicated first char in option')
+    .options([{ name: 'anotheroption', description: 'another option' }]);
 
   const config = args.parse(argv);
 
@@ -41,6 +52,13 @@ test('options', t => {
         break;
       case 8000:
         t.is(content, port);
+        break;
+      case 'anotheroptionvalue':
+        if (property === 'a') {
+          t.is(property, 'a');
+        } else {
+          t.is(property, 'anotheroption');
+        }
         break;
       default:
         t.true(content);
