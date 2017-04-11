@@ -9,6 +9,7 @@ const parser = require('minimist');
 const pkginfo = require('pkginfo');
 const camelcase = require('camelcase');
 const chalk = require('chalk');
+const stringSimilarity = require('string-similarity');
 
 class Args {
   constructor() {
@@ -520,6 +521,7 @@ class Args {
     const args = {};
     const defined = this.isDefined(subCommand, 'commands');
     const optionList = this.getOptions();
+    const unknownSubcommand = !defined && subCommand;
 
     Object.assign(args, this.raw);
     args._.shift();
@@ -533,9 +535,25 @@ class Args {
       return {};
     }
 
+    if (unknownSubcommand) {
+      const availableSubcommands = this.details.commands.map(sub => sub.usage);
+      const suggestSubcommand = stringSimilarity.findBestMatch(
+        subCommand,
+        availableSubcommands
+      );
+      console.log(`\nUnknown Subcommand ${this.printMainColor(subCommand)}`);
+
+      if (suggestSubcommand.bestMatch.rating >= 0.5) {
+        // 0.5 rating will catch small typos, e.g. import => omport
+        console.log(
+          `Did you mean ${this.printMainColor(suggestSubcommand.bestMatch.target)}?`
+        );
+      }
+    }
+
     // Show usage information if "help" or "h" option was used
     // And respect the option related to it
-    if (this.config.help && helpTriggered) {
+    if ((this.config.help && helpTriggered) || unknownSubcommand) {
       this.showHelp();
     }
 
