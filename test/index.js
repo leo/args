@@ -84,11 +84,11 @@ test('config', t => {
   args.parse(argv, {
     help: false,
     errors: false,
-    author: false
+    authors: false
   });
 
   t.true(args.config.version);
-  t.false(args.config.author);
+  t.false(args.config.authors);
   t.false(args.config.help);
   t.false(args.config.errors);
 });
@@ -117,6 +117,8 @@ test('command aliases', async t => {
   }
 
   result = await run('author');
+  t.regex(result, new RegExp(author));
+  result = await run('authors');
   t.regex(result, new RegExp(author));
 
   result = await run('help');

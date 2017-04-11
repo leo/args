@@ -24,7 +24,7 @@ class Args {
     this.config = {
       help: true,
       version: true,
-      author: true,
+      authors: true,
       usageFilter: null,
       value: null,
       name: null,
@@ -507,8 +507,8 @@ class Args {
       this.command('help', 'Display help', this.showHelp);
     }
 
-    if (this.config.author) {
-      this.command('author', 'Display author info', this.showAuthors);
+    if (this.config.authors) {
+      this.command('author(s)', 'Display author info', this.showAuthors);
     }
 
     // Parse arguments using minimist
@@ -520,7 +520,11 @@ class Args {
       this.checkVersion();
     }
 
-    const subCommand = this.raw._[1];
+    let subCommand = this.raw._[1];
+    if (subCommand === 'authors' || subCommand === 'author') {
+      subCommand = 'author(s)';
+    }
+
     const helpTriggered = this.raw.h || this.raw.help;
 
     const args = {};
@@ -641,7 +645,7 @@ class Args {
   showAuthors() {
     const parent = module.parent;
 
-    // get author(s) from parent module
+    // Get author(s) from parent module
     const { authors, author, collaborators } = parent.exports;
 
     const sublist = (title, list) =>
