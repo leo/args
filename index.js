@@ -65,7 +65,7 @@ class Args {
     }
 
     for (const item of list) {
-      const preset = item.defaultValue || undefined;
+      const preset = item.defaultValue;
       const init = item.init || false;
 
       this.option(item.name, item.description, preset, init);
