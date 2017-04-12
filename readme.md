@@ -56,9 +56,9 @@ In turn, this is how the auto-generated usage information will look like:
 
   Commands:
 
-    serve, s       Serve your static site
-    help           Display help
-    author         Display author info
+    serve, s         Serve your static site
+    help             Display help
+    author, authors  Display author info
 
   Options:
 
@@ -177,7 +177,7 @@ By default, the module already registers some default options (e.g. "version" an
 | help | Automatically render the usage information when running `help`, `-h` or `--help` | true | Boolean |
 | name | The name of your program to display in help | Name of script file | String |
 | version | Outputs the version tag of your package.json | true | Boolean |
-| author  | Automatically render author information when running `author` | true | Boolean |
+| authors  | Automatically render author information when running `author` | true | Boolean |
 | usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
 | value | Suffix for the "Usage" section of the usage information ([example](https://github.com/leo/args/issues/13)) | null | String |
 | minimist | Additional parsing options to pass to minimist, see [minimist docs](https://github.com/substack/minimist) for details | undefined | Object |
