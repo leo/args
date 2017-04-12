@@ -644,6 +644,9 @@ class Args {
   showAuthors() {
     const parent = module.parent;
 
+    // Load parent module
+    pkginfo(parent);
+
     // Get author(s) from parent module
     const { authors, author } = parent.exports;
 
