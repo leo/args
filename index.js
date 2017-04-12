@@ -508,7 +508,9 @@ class Args {
     }
 
     if (this.config.authors) {
-      this.command('author(s)', 'Display author info', this.showAuthors);
+      this.command('author', 'Display author info', this.showAuthors, [
+        'authors'
+      ]);
     }
 
     // Parse arguments using minimist
@@ -520,10 +522,7 @@ class Args {
       this.checkVersion();
     }
 
-    let subCommand = this.raw._[1];
-    if (subCommand === 'authors' || subCommand === 'author') {
-      subCommand = 'author(s)';
-    }
+    const subCommand = this.raw._[1];
 
     const helpTriggered = this.raw.h || this.raw.help;
 
