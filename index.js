@@ -645,7 +645,7 @@ class Args {
     const parent = module.parent;
 
     // Get author(s) from parent module
-    const { authors, author, collaborators } = parent.exports;
+    const { authors, author } = parent.exports;
 
     const sublist = (title, list) =>
       Array.isArray(list)
@@ -667,12 +667,7 @@ class Args {
       return ['No author found.'];
     };
 
-    const output = getOutput();
-    if (collaborators) {
-      output.push('', ...sublist('Collaborators', collaborators));
-    }
-
-    console.log(['', ...output, ''].join('\n  '));
+    console.log(['', ...getOutput(), ''].join('\n  '));
     // eslint-disable-next-line unicorn/no-process-exit
     process.exit();
   }
