@@ -272,7 +272,7 @@ class Args {
         process.stdout.write(`The option "${option}" is unknown.`);
 
         if (suggestOption.bestMatch.rating >= 0.5) {
-          process.stdout.write(' Did you mean the following one?\n\n');
+          process.stdout.write(' Did you mean the following one?\n');
 
           const suggestion = this.details.options.filter(item => {
             for (const flag of item.usage) {
