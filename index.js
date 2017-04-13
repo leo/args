@@ -269,18 +269,31 @@ class Args {
           availableOptions
         );
 
-        console.log(`Unknown Option ${this.printMainColor(option)}`);
+        process.stdout.write(`The option "${option}" is unknown.`);
 
         if (suggestOption.bestMatch.rating >= 0.5) {
-          const optionPrefix = suggestOption.bestMatch.target.length === 1
-            ? '-'
-            : '--';
-          console.log(
-            `Did you mean ${this.printMainColor(optionPrefix + suggestOption.bestMatch.target)}?`
-          );
-        }
+          process.stdout.write(' Did you mean the following one?\n\n');
 
-        this.showHelp();
+          const suggestion = this.details.options.filter(item => {
+            for (const flag of item.usage) {
+              if (flag === suggestOption.bestMatch.target) {
+                return true;
+              }
+            }
+
+            return false;
+          });
+
+          process.stdout.write(
+            this.generateDetails(suggestion)[0].trim() + '\n'
+          );
+
+          // eslint-disable-next-line unicorn/no-process-exit
+          process.exit();
+        } else {
+          process.stdout.write(` Here's a list of all available options: \n`);
+          this.showHelp();
+        }
       }
     }
 
@@ -307,7 +320,7 @@ class Args {
 
   generateDetails(kind) {
     // Get all properties of kind from global scope
-    const items = this.details[kind];
+    const items = typeof kind === 'string' ? this.details[kind] : kind;
     const parts = [];
     const isCmd = kind === 'commands';
 
