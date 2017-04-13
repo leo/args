@@ -259,6 +259,28 @@ class Args {
       if (related) {
         const details = this.readOption(related);
         Object.assign(options, details);
+      } else {
+        // Unknown Option
+        const availableOptions = [].concat(
+          ...this.details.options.map(opt => opt.usage)
+        );
+        const suggestOption = stringSimilarity.findBestMatch(
+          option,
+          availableOptions
+        );
+
+        console.log(`Unknown Option ${this.printMainColor(option)}`);
+
+        if (suggestOption.bestMatch.rating >= 0.5) {
+          const optionPrefix = suggestOption.bestMatch.target.length === 1
+            ? '-'
+            : '--';
+          console.log(
+            `Did you mean ${this.printMainColor(optionPrefix + suggestOption.bestMatch.target)}?`
+          );
+        }
+
+        this.showHelp();
       }
     }
 
@@ -521,7 +543,6 @@ class Args {
     const args = {};
     const defined = this.isDefined(subCommand, 'commands');
     const optionList = this.getOptions();
-    const unknownSubcommand = !defined && subCommand;
 
     Object.assign(args, this.raw);
     args._.shift();
@@ -535,25 +556,9 @@ class Args {
       return {};
     }
 
-    if (unknownSubcommand) {
-      const availableSubcommands = this.details.commands.map(sub => sub.usage);
-      const suggestSubcommand = stringSimilarity.findBestMatch(
-        subCommand,
-        availableSubcommands
-      );
-      console.log(`\nUnknown Subcommand ${this.printMainColor(subCommand)}`);
-
-      if (suggestSubcommand.bestMatch.rating >= 0.5) {
-        // 0.5 rating will catch small typos, e.g. import => omport
-        console.log(
-          `Did you mean ${this.printMainColor(suggestSubcommand.bestMatch.target)}?`
-        );
-      }
-    }
-
     // Show usage information if "help" or "h" option was used
     // And respect the option related to it
-    if ((this.config.help && helpTriggered) || unknownSubcommand) {
+    if (this.config.help && helpTriggered) {
       this.showHelp();
     }
 
