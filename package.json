@@ -3,7 +3,8 @@
   "version": "2.6.0",
   "description": "Minimal toolkit for building CLIs",
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "scripts": {
     "precommit": "lint-staged",
