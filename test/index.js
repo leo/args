@@ -6,7 +6,7 @@ import test from 'ava';
 import execa from 'execa';
 
 // Ours
-import args from '../lib/';
+import args from '../lib';
 import { version } from '../package';
 
 const port = 8000;
