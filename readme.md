@@ -120,7 +120,7 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 
 Register the default command  that runs if no sub command is provided.
 
-- **name:** Takes either a command name registered with `.command`:
+- **command:** Takes either a command name registered with `.command`:
 
   ```js
   .command('serve', 'Serve your static site', ['s'])
