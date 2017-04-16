@@ -17,7 +17,8 @@ class Args {
     this.details = {
       options: [],
       commands: [],
-      examples: []
+      examples: [],
+      defaultCommand: null
     };
 
     // Configuration defaults
@@ -157,6 +158,14 @@ class Args {
     });
 
     // Allow chaining of .command()
+    return this;
+  }
+
+  defaultCommand(command) {
+    // Register default command to global scope
+    this.details.defaultCommand = command;
+
+    // Allow chaining of .defaultCommand()
     return this;
   }
 
@@ -543,7 +552,9 @@ class Args {
 
     // Parse arguments using minimist
     this.raw = parser(argv.slice(1), this.config.minimist);
-    this.binary = path.basename(this.raw._[0]);
+    if (this.raw._[0]) {
+      this.binary = path.basename(this.raw._[0]);
+    }
 
     // If default version is allowed, check for it
     if (this.config.version) {
@@ -566,6 +577,21 @@ class Args {
     // If sub command is defined, run it
     if (defined) {
       this.runCommand(defined, optionList);
+      return {};
+    }
+
+    // If default command is defined, run it
+    const defaultCommand = this.details.defaultCommand;
+    if (!subCommand && defaultCommand) {
+      const defaultType = typeof defaultCommand;
+      if (defaultType === 'string') {
+        const defaultDefined = this.isDefined(defaultCommand, 'commands');
+        if (defaultDefined) {
+          this.runCommand(defaultDefined, optionList);
+        }
+      } else if (defaultType === 'function') {
+        defaultCommand(optionList);
+      }
       return {};
     }
 
