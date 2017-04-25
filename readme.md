@@ -116,6 +116,25 @@ For example: If your main binary is called "muffin", the binary of the subcomman
 
 - **aliases:** Takes in an array of aliases which can be used to run the command.
 
+### .defaultCommand(command)
+
+Register the default command  that runs if no sub command is provided.
+
+- **command:** Takes either a command name registered with `.command`:
+
+  ```js
+  .command('serve', 'Serve your static site', ['s'])
+  .defaultCommand('serve')
+  ```
+
+  Or a function that is passed the options list:
+
+  ```js
+  .defaultCommand(options => {
+    console.log('This is the default command.')
+  })
+  ```
+
 ### .example(usage, description)
 
 Register an example which will be shown when calling `help`

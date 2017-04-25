@@ -125,3 +125,18 @@ test('options propogated to minimist', t => {
 
   t.is(config.port, port.toString());
 });
+
+test('defaultCommand', async t => {
+  const result = await run('');
+  t.is(result, 'install');
+});
+
+test('defaultCommand as function', async t => {
+  let hasRun = false;
+  args.defaultCommand(() => {
+    hasRun = true;
+  });
+  args.parse(argv);
+  await run('');
+  t.true(hasRun);
+});

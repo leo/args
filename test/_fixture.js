@@ -24,4 +24,5 @@ args.command('cmd', 'cmd desc', () => {
 
 args.command('binary', 'some desc', ['b']);
 args.option(['a', 'abc'], 'something', 'def value');
+args.defaultCommand('install');
 args.parse(process.argv);
