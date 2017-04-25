@@ -231,7 +231,7 @@ class Args {
     return contents;
   }
 
-  getOptions() {
+  getOptions(definedSubcommand) {
     const options = {};
     const args = {};
 
@@ -259,7 +259,9 @@ class Args {
       if (related) {
         const details = this.readOption(related);
         Object.assign(options, details);
-      } else {
+      }
+
+      if (!related && !definedSubcommand) {
         // Unknown Option
         const availableOptions = [].concat(
           ...this.details.options.map(opt => opt.usage)
@@ -555,7 +557,7 @@ class Args {
 
     const args = {};
     const defined = this.isDefined(subCommand, 'commands');
-    const optionList = this.getOptions();
+    const optionList = this.getOptions(defined);
 
     Object.assign(args, this.raw);
     args._.shift();
