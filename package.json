@@ -1,10 +1,11 @@
 {
   "name": "args",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "Minimal toolkit for building CLIs",
   "files": [
-    "index.js"
+    "lib"
   ],
+  "main": "lib/index.js",
   "scripts": {
     "precommit": "lint-staged",
     "test": "npm run lint && ava",

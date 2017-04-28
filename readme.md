@@ -11,8 +11,8 @@ This package makes creating command line interfaces a breeze.
 - Auto-generated usage information
 - Determines type of option by checking type of default value (e.g. `['hi']` => `<list>`)
 - Clean [syntax](#usage) for defining options and commands
-- The core only contains a [few hundred lines](src/index.js) of code (even after transpiling)
 - Easily [retrieve](#usage) values of options
+- Automatically suggests a similar option, if the user entered an unknown one
 
 ## Usage
 
