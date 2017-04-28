@@ -1,4 +1,4 @@
-const args = require('../');
+const args = require('../lib');
 
 args.command(
   'install',
