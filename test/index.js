@@ -42,7 +42,6 @@ test('options', t => {
     }
 
     const content = config[property];
-    console.log(content);
 
     switch (content) {
       case 'D':
