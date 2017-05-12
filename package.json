@@ -13,7 +13,7 @@
   },
   "repository": "leo/args",
   "engines": {
-    "node": ">= 6.6.0"
+    "node": "> 4.0.0"
   },
   "keywords": [
     "cli",
