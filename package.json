@@ -1,6 +1,6 @@
 {
   "name": "args",
-  "version": "2.6.1",
+  "version": "3.0.2",
   "description": "Minimal toolkit for building CLIs",
   "files": [
     "lib"
@@ -13,7 +13,7 @@
   },
   "repository": "leo/args",
   "engines": {
-    "node": ">= 6.6.0"
+    "node": "> 4.0.0"
   },
   "keywords": [
     "cli",
@@ -42,12 +42,12 @@
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
     "ava": "0.19.1",
-    "eslint-config-prettier": "1.6.0",
+    "eslint-config-prettier": "2.0.0",
     "execa": "0.6.3",
     "husky": "0.13.3",
-    "lint-staged": "3.4.0",
-    "prettier": "0.22.0",
-    "xo": "0.18.1"
+    "lint-staged": "3.4.1",
+    "prettier": "1.3.1",
+    "xo": "0.18.2"
   },
   "dependencies": {
     "camelcase": "4.1.0",
