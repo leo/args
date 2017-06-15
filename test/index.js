@@ -7,7 +7,7 @@ import execa from 'execa';
 
 // Ours
 import args from '../lib';
-import { version } from '../package';
+import { version, author } from '../package';
 
 const port = 8000;
 
@@ -50,6 +50,9 @@ test('options', t => {
       case version:
         t.is(content, version);
         break;
+      case author:
+        t.is(content, author);
+        break;
       case 8000:
         t.is(content, port);
         break;
@@ -87,10 +90,12 @@ test('usage information', t => {
 test('config', t => {
   args.parse(argv, {
     help: false,
-    errors: false
+    errors: false,
+    authors: false
   });
 
   t.true(args.config.version);
+  t.false(args.config.authors);
   t.false(args.config.help);
   t.false(args.config.errors);
 });
@@ -117,6 +122,11 @@ test('command aliases', async t => {
   } catch (err) {
     t.regex(err.message, /_fixture-binary/gm);
   }
+
+  result = await run('author');
+  t.regex(result, new RegExp(author));
+  result = await run('authors');
+  t.regex(result, new RegExp(author));
 
   result = await run('help');
   const regexes = [/binary, b/, /cmd/, /-a, --abc \[value]/];
