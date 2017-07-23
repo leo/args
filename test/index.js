@@ -125,10 +125,10 @@ test('command aliases', async t => {
   }
 });
 
-test('options propogated to minimist', t => {
+test('options propogated to nanomist', t => {
   args.option('port', 'The port on which the site will run');
 
-  const config = args.parse(argv, { minimist: { string: 'p' } });
+  const config = args.parse(argv, { nanomist: { string: 'p' } });
 
   t.is(config.port, port.toString());
 });
