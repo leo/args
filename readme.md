@@ -144,7 +144,7 @@ The methods also returns all options that have been used and their respective va
 
 ### .sub
 
-This property exposes all sub arguments that have been parsed by [minimist](https://npmjs.com/minimist). This is useful when trying to get the value after the command, for example:
+This property exposes all sub arguments that have been parsed by [mri](https://npmjs.com/mri). This is useful when trying to get the value after the command, for example:
 
 ```bash
 pizza ./directory
@@ -178,7 +178,7 @@ By default, the module already registers some default options (e.g. "version" an
 | version | Outputs the version tag of your package.json | true | Boolean |
 | usageFilter | Allows you to specify a filter through which the usage information will be passed before it gets outputted | null | Function |
 | value | Suffix for the "Usage" section of the usage information ([example](https://github.com/leo/args/issues/13)) | null | String |
-| minimist | Additional parsing options to pass to minimist, see [minimist docs](https://github.com/substack/minimist) for details | undefined | Object |
+| mri | Additional parsing options to pass to mri, see [mri docs](https://github.com/lukeed/mri) for details | undefined | Object |
 | mainColor | Specify the main color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers. You can specify multiple colors / modifiers with an array. For example: `{mainColor: ['red', 'bold', 'underline']}` | yellow | String[Array] |
 | subColor | Specify the sub color for the output when running the `help` command. See [chalk docs](https://github.com/chalk/chalk) for available colors / modifiers. You can specify multiple colors / modifiers with an array. For example: `{subColor: ['dim', 'blue']}` | dim | String[Array] |
 
