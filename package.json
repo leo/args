@@ -41,19 +41,19 @@
   },
   "homepage": "https://github.com/leo/args#readme",
   "devDependencies": {
-    "ava": "0.21.0",
+    "ava": "0.22.0",
     "eslint-config-prettier": "2.3.0",
-    "execa": "0.7.0",
+    "execa": "0.8.0",
     "husky": "0.14.3",
-    "lint-staged": "4.0.1",
-    "prettier": "1.5.3",
+    "lint-staged": "4.0.4",
+    "prettier": "1.6.1",
     "xo": "0.18.2"
   },
   "dependencies": {
     "camelcase": "4.1.0",
-    "chalk": "2.0.1",
+    "chalk": "2.1.0",
     "mri": "1.1.0",
-    "pkginfo": "0.4.0",
+    "pkginfo": "0.4.1",
     "string-similarity": "1.2.0"
   }
 }
