@@ -1,6 +1,6 @@
 branches:
   only:
-  - testappveyor
+  - master
 
 environment:
   matrix:
