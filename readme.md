@@ -165,14 +165,19 @@ pizza eat ./directory
 
 ### .showHelp()
 
-Outputs the usage information based on the options and comments you've registered so far.
+Outputs the usage information based on the options and comments you've registered so far and exits, if configured to do so.
+
+### .showVersion()
+
+Outputs the version and exits, if configured to do so.
 
 ## Configuration
 
-By default, the module already registers some default options (e.g. "version" and "help"), as well as a command named "help". These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties:
+By default, the module already registers some default options and commands (e.g. "version" and "help"). These things have been implemented to make creating CLIs easier for beginners. However, they can also be disabled by taking advantage of the following properties:
 
 | Property | Description | Default&nbsp;value | Type |
 | -------- | ----------- | ------------------ | ---- |
+| exit | Automatically exits when help or version is rendered  | `{ help: true, version: true }` | Object |
 | help | Automatically render the usage information when running `help`, `-h` or `--help` | true | Boolean |
 | name | The name of your program to display in help | Name of script file | String |
 | version | Outputs the version tag of your package.json | true | Boolean |
