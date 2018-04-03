@@ -206,3 +206,43 @@ test('options propogated to mri', t => {
 
   t.is(config.port, port.toString());
 });
+/* Skip
+test('similarity option', async t => {
+  const args = setupOptions();
+
+  const config = args.parse(["node", "foo", "lst"]);
+
+  for (const property in config) {
+    if (!{}.hasOwnProperty.call(config, property)) {
+      continue;
+    }
+
+    const content = config[property];
+
+    switch (content) {
+      case 'D':
+        t.is(content, 'D');
+        break;
+      case version:
+        t.is(content, version);
+        break;
+      case 8000:
+        t.is(content, port);
+        break;
+      case 'anotheroptionvalue':
+        if (property === 'a') {
+          t.is(property, 'a');
+        } else {
+          t.is(property, 'anotheroption');
+        }
+        break;
+      default:
+        if (content.constructor === Array) {
+          t.deepEqual(content, [10]);
+        } else {
+          t.true(content);
+        }
+    }
+  }
+});
+*/
