@@ -9,6 +9,25 @@ import execa from 'execa';
 import args from '../lib';
 import { version } from '../package';
 
+// Provide a reset function during testing.
+args.reset = function() {
+  this.details = {
+    options: [],
+    commands: [],
+    examples: []
+  };
+  return this;
+};
+
+// Provide a helper function for suppressing any output.
+args.suppressOutput = function(fn) {
+  const original = process.stdout.write;
+  process.stdout.write = () => () => {};
+  const result = fn.call(this);
+  process.stdout.write = original;
+  return result;
+};
+
 const port = 8000;
 
 const argv = [
@@ -25,7 +44,13 @@ const argv = [
   10
 ];
 
-test('options', t => {
+// Reset args after each test.
+test.afterEach.always(() => {
+  args.reset();
+});
+
+// @todo Each of these options should be broken out into separate tests.
+function setupOptions() {
   args
     .option('port', 'The port on which the site will run')
     .option('true', 'Boolean', true)
@@ -33,6 +58,12 @@ test('options', t => {
     .option(['d', 'data'], 'The data that shall be used')
     .option('duplicated', 'Duplicated first char in option')
     .options([{ name: 'anotheroption', description: 'another option' }]);
+  return args;
+}
+
+// @todo Each of these options should be broken out into separate tests.
+test('options', t => {
+  const args = setupOptions();
 
   const config = args.parse(argv);
 
@@ -70,7 +101,48 @@ test('options', t => {
   }
 });
 
+test('help/host: only host is triggered', t => {
+  args.option('host', 'The host address');
+  const config = args.parse(['node', 'foo', '-h', 'http://example.com']);
+  t.is(config.h, 'http://example.com');
+  t.is(config.host, 'http://example.com');
+  t.falsy(config.H);
+  t.falsy(config.help);
+});
+
+test('help/host: only help is triggered', t => {
+  args.option('host', 'The host address');
+  const config = args.suppressOutput(() =>
+    args.parse(['node', 'foo', '-H'], { exit: { help: false } })
+  );
+  t.falsy(config.h);
+  t.falsy(config.host);
+  t.true(config.H);
+  t.true(config.help);
+});
+
+test('version/verbose: only verbose is triggered', t => {
+  args.option('verbose', 'Verbose output');
+  const config = args.parse(['node', 'foo', '-v']);
+  t.true(config.v);
+  t.true(config.verbose);
+  t.falsy(config.H);
+  t.falsy(config.help);
+});
+
+test('version/verbose: only version is triggered', t => {
+  args.option('verbose', 'Verbose output');
+  const config = args.suppressOutput(() =>
+    args.parse(['node', 'foo', '-V'], { exit: { version: false } })
+  );
+  t.falsy(config.v);
+  t.falsy(config.verbose);
+  t.true(config.V);
+  t.true(config.version);
+});
+
 test('usage information', t => {
+  const args = setupOptions();
   const filter = data => data;
 
   args.parse(argv, {
@@ -85,6 +157,7 @@ test('usage information', t => {
 });
 
 test('config', t => {
+  const args = setupOptions();
   args.parse(argv, {
     help: false,
     errors: false
@@ -126,6 +199,7 @@ test('command aliases', async t => {
 });
 
 test('options propogated to mri', t => {
+  const args = setupOptions();
   args.option('port', 'The port on which the site will run');
 
   const config = args.parse(argv, { mri: { string: 'p' } });
