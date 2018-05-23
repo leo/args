@@ -24,4 +24,14 @@ args.command('cmd', 'cmd desc', () => {
 
 args.command('binary', 'some desc', ['b'])
 args.option(['a', 'abc'], 'something', 'def value')
+args.examples([
+  {
+    usage: 'args install -d',
+    description: 'Run the args command with the option -d'
+  },
+  {
+    usage: 'args uninstall -d',
+    description: 'Another description here'
+  }
+])
 args.parse(process.argv)
