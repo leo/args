@@ -45,14 +45,14 @@
     "eslint-config-prettier": "2.9.0",
     "execa": "0.10.0",
     "husky": "0.14.3",
-    "lint-staged": "7.0.4",
-    "prettier": "1.11.1",
-    "xo": "0.20.3"
+    "lint-staged": "7.2.0",
+    "prettier": "1.13.5",
+    "xo": "0.21.1"
   },
   "dependencies": {
     "camelcase": "5.0.0",
-    "chalk": "2.3.2",
+    "chalk": "2.4.1",
     "leven": "2.1.0",
-    "mri": "1.1.0"
+    "mri": "1.1.1"
   }
 }
