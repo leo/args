@@ -90,6 +90,7 @@ test('options', t => {
         } else {
           t.is(property, 'anotheroption')
         }
+
         break
       default:
         if (content.constructor === Array) {
@@ -187,8 +188,8 @@ test('command aliases', async t => {
 
   try {
     await run('b')
-  } catch (err) {
-    t.regex(err.message, /_fixture-binary/gm)
+  } catch (error) {
+    t.regex(error.message, /_fixture-binary/gm)
   }
 
   result = await run('help')
