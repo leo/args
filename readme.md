@@ -27,7 +27,7 @@ Once you're done, you can start using it within your binaries:
 ```js
 #!/usr/bin/env node
 
-import args from 'args'
+const args = require('args')
 
 args
   .option('port', 'The port on which the app will be running', 3000)
