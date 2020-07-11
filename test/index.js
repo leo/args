@@ -207,3 +207,12 @@ test('options propogated to mri', t => {
 
   t.is(config.port, port.toString())
 })
+
+test('short form option works with mri default', t => {
+  const args = setupOptions()
+  args.option('port', 'The port on which the site will run')
+
+  const config = args.parse(argv, { mri: { default: { port: 3000 } } })
+
+  t.is(config.port, port)
+})
